@@ -2,7 +2,7 @@
   "name": "@eliware/mcp-server-template",
   "type": "module",
   "version": "1.1.0",
-  "description": "A template for starting new Node.js projects.",
+  "description": "A Model Context Protocol (MCP) server template for building AI and automation tool APIs.",
   "main": "mcp-server-template.mjs",
   "scripts": {
     "start": "node mcp-server-template.mjs",
@@ -12,10 +12,14 @@
     "type": "git",
     "url": "git+https://github.com/eliware/mcp-server-template.git"
   },
-    "keywords": [
-        "mcp-server-template",
-        "nodejs"
-    ],
+  "keywords": [
+    "mcp-server",
+    "mcp-server-template",
+    "ai-tools",
+    "automation",
+    "nodejs",
+    "template"
+  ],
   "author": "Eli Sterling, eliware.org <eli@eliware.org>",
   "license": "MIT",
   "bugs": {
@@ -34,7 +38,8 @@
     ]
   },
   "dependencies": {
-    "@eliware/common": "^1.1.1",
+    "@eliware/common": "^1.0.17",
+    "@eliware/mcp-server": "^1.0.22",
     "dotenv": "^17.2.0"
   }
 }
