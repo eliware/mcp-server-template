@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/eliware/mcp-server-template#readme",
   "devDependencies": {
-    "jest": "^30.0.4"
+    "jest": "^30.4.2"
   },
   "jest": {
     "testEnvironment": "node",
@@ -40,7 +40,7 @@
   },
   "dependencies": {
     "@eliware/common": "^1.0.17",
-    "@eliware/mcp-server": "^1.1.4",
-    "dotenv": "^17.2.0"
+    "@eliware/mcp-server": "^1.1.5",
+    "dotenv": "^17.4.2"
   }
 }
