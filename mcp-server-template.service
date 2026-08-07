@@ -1,18 +1,36 @@
 [Unit]
-Description=mcp-server-template
+Description=Eliware MCP server template
 After=network-online.target
 Wants=network-online.target
 StartLimitBurst=3
 StartLimitIntervalSec=60
 
 [Service]
+Type=simple
 User=root
 Group=root
-RestartSec=5
-Restart=on-failure
 WorkingDirectory=/opt/mcp-server-template
-ExecStart=/opt/mcp-server-template/mcp-server-template.mjs
-EnvironmentFile=/opt/mcp-server-template/.env
+ExecStart=/usr/bin/node /opt/mcp-server-template/mcp-server-template.mjs
+EnvironmentFile=-/opt/mcp-server-template/.env
+Environment=NODE_ENV=production
+Restart=on-failure
+RestartSec=5s
+KillSignal=SIGINT
+TimeoutStopSec=30s
+
+NoNewPrivileges=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectHome=true
+ProtectSystem=strict
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+CapabilityBoundingSet=
+LockPersonality=true
+UMask=027
 
 [Install]
 WantedBy=multi-user.target

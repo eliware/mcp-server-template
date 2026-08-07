@@ -1,0 +1,14 @@
+.git
+.github
+coverage
+node_modules
+npm-debug.log*
+*.log
+.env
+.env.*
+!.env.example
+.jest.result
+.cache.agentx*
+.agentx*
+Dockerfile
+.dockerignore

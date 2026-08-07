@@ -40,8 +40,8 @@
     ]
   },
   "dependencies": {
-    "@eliware/common": "^1.0.17",
-    "@eliware/mcp-server": "^1.1.5",
+    "@eliware/common": "^1.1.5",
+    "@eliware/mcp-server": "^1.1.6",
     "dotenv": "^17.4.2"
   }
 }

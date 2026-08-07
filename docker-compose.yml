@@ -1,0 +1,27 @@
+services:
+  mcp-server-template:
+    build:
+      context: .
+    image: mcp-server-template:local
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: ${NODE_ENV:-production}
+      MCP_HTTP_PORT: ${MCP_HTTP_PORT:-1234}
+      MCP_TOKEN: ${MCP_TOKEN:?set MCP_TOKEN}
+    ports:
+      - "${HOST_PORT:-1234}:${MCP_HTTP_PORT:-1234}"
+    restart: unless-stopped
+    stop_grace_period: 30s
+    init: true
+    pull_policy: build
+    healthcheck:
+      test:
+        - CMD
+        - node
+        - -e
+        - "fetch('http://127.0.0.1:' + (process.env.MCP_HTTP_PORT || 1234)).then(() => process.exit(0)).catch(() => process.exit(1))"
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
