@@ -35,8 +35,7 @@
     "testEnvironment": "node",
     "testMatch": [
       "**/?(*.)+(spec|test).[jt]s?(x)",
-      "**/?(*.)+(spec|test).mjs",
-      "**/?(*.)+(spec|test).cjs"
+      "**/?(*.)+(spec|test).mjs"
     ]
   },
   "dependencies": {

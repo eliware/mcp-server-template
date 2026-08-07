@@ -20,7 +20,7 @@ services:
         - CMD
         - node
         - -e
-        - "fetch('http://127.0.0.1:' + (process.env.MCP_HTTP_PORT || 1234)).then(() => process.exit(0)).catch(() => process.exit(1))"
+        - "fetch('http://127.0.0.1:' + (process.env.MCP_HTTP_PORT || 1234), { headers: { authorization: 'Bearer ' + process.env.MCP_TOKEN } }).then(r => process.exit(r.ok || r.status === 401 ? 0 : 1)).catch(() => process.exit(1))"
       interval: 30s
       timeout: 5s
       retries: 3

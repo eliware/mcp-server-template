@@ -10,5 +10,6 @@ npm-debug.log*
 .jest.result
 .cache.agentx*
 .agentx*
-Dockerfile
-.dockerignore
+Dockerfile*
+docker-compose*.yml
+*.service
