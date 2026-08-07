@@ -12,6 +12,11 @@ Template for building a production-ready Model Context Protocol server with
 - Docker, Compose, and systemd deployment files
 - Native ESM and TypeScript-compatible MCP server package
 
+## Requirements
+
+- Node.js 26 or newer
+- An MCP client for live HTTP/stdio operation
+
 ## Quick start
 
 ```bash
@@ -64,6 +69,7 @@ The included `tools/echo.mjs` demonstrates the complete pattern.
 npm test
 npm run test:gaps
 npm run lint
+npm run pack
 npm audit
 ```
 
@@ -98,6 +104,14 @@ sudo systemctl daemon-reload
 sudo systemctl enable --now mcp-server-template
 sudo systemctl status mcp-server-template
 ```
+
+## Errors / Troubleshooting
+
+This is a starter server, not a production deployment. Keep `MCP_TOKEN` in `.env` or secret storage, verify the `/mcp` endpoint and configured port, and use stdio only with controlled child processes. Review tools and context injection before deployment.
+
+## Security
+
+Never commit `.env`, bearer tokens, private keys, or credential-bearing URLs. Use HTTPS and secret mounts for remote deployments, and grant tools only the minimum required context and permissions.
 
 ## License
 
