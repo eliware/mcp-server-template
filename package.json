@@ -2,7 +2,7 @@
     "name": "@eliware/mcp-server-template",
     "type": "module",
     "version": "1.1.0",
-    "description": "A Model Context Protocol (MCP) server template for building AI and automation tool APIs.",
+    "description": "A production-ready Model Context Protocol server template for building AI and automation tool APIs.",
     "main": "mcp-server-template.mjs",
     "scripts": {
         "start": "node mcp-server-template.mjs",
@@ -20,7 +20,9 @@
         "mcp-server-template",
         "ai-tools",
         "automation",
+        "mcp",
         "nodejs",
+        "esm",
         "template"
     ],
     "author": "Eli Sterling, eliware.org <eli@eliware.org>",
