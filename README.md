@@ -119,7 +119,7 @@ docker compose ps
 
 The service file runs as root by default to match the deployment standard.
 Adjust `User=` and `Group=` for project-specific deployments. The service expects
-the application at `/opt/mcp-server-template`:
+the application from its checked-out project root:
 
 ```bash
 sudo cp mcp-server-template.service /etc/systemd/system/
