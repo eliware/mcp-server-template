@@ -1,7 +1,28 @@
-# @eliware/mcp-server-template
+# [![eliware.org](https://eliware.org/logos/brand.png)](https://discord.gg/M6aTR9eTwN)
+
+## @eliware/mcp-server-template [![npm version](https://img.shields.io/npm/v/@eliware/mcp-server-template.svg)](https://www.npmjs.com/package/@eliware/mcp-server-template)[![license](https://img.shields.io/github/license/eliware/mcp-server-template.svg)](LICENSE)[![build status](https://github.com/eliware/mcp-server-template/actions/workflows/nodejs.yml/badge.svg)](https://github.com/eliware/mcp-server-template/actions)
 
 Template for building a production-ready Model Context Protocol server with
 [`@eliware/mcp-server`](https://www.npmjs.com/package/@eliware/mcp-server).
+
+---
+
+## Table of Contents
+
+- [Features](#features)
+- [Requirements](#requirements)
+- [Getting Started](#getting-started)
+- [Environment](#environment)
+- [Adding Tools](#adding-tools)
+- [Testing and Linting](#testing-and-linting)
+- [Deployment](#deployment)
+  - [Docker](#docker)
+  - [systemd](#systemd)
+- [Errors / Troubleshooting](#errors--troubleshooting)
+- [Security](#security)
+- [Support](#support)
+- [License](#license)
+- [Links](#links)
 
 ## Features
 
@@ -17,7 +38,7 @@ Template for building a production-ready Model Context Protocol server with
 - Node.js 26 or newer
 - An MCP client for live HTTP/stdio operation
 
-## Quick start
+## Getting Started
 
 ```bash
 npm install
@@ -40,7 +61,7 @@ node mcp-server-template.mjs --stdio
 | `MCP_HTTP_PORT` | `1234` | HTTP listener port. |
 | `NODE_ENV` | unset | Set to `production` for deployment. |
 
-## Adding tools
+## Adding Tools
 
 Create a `.mjs` file in `tools/`. The default export receives the MCP server,
 tool name, logger, and any configured context:
@@ -63,7 +84,8 @@ export default async function registerTool({ mcpServer, toolName, log }) {
 
 The included `tools/echo.mjs` demonstrates the complete pattern.
 
-## Testing and linting
+## Testing and Linting
+
 
 ```bash
 npm test
@@ -73,7 +95,9 @@ npm run pack
 npm audit
 ```
 
-## Docker
+## Deployment
+
+### Docker
 
 ```bash
 docker build -t mcp-server-template:local .
@@ -92,7 +116,7 @@ docker compose up --build -d
 docker compose ps
 ```
 
-## systemd
+### systemd
 
 The service file runs as root by default to match the deployment standard.
 Adjust `User=` and `Group=` for project-specific deployments. The service expects
@@ -113,6 +137,22 @@ This is a starter server, not a production deployment. Keep `MCP_TOKEN` in `.env
 
 Never commit `.env`, bearer tokens, private keys, or credential-bearing URLs. Use HTTPS and secret mounts for remote deployments, and grant tools only the minimum required context and permissions.
 
+## Support
+
+For help, questions, or community discussion, visit:
+
+[![Discord](https://eliware.org/logos/discord_96.png)](https://discord.gg/M6aTR9eTwN)[![eliware.org](https://eliware.org/logos/eliware_96.png)](https://discord.gg/M6aTR9eTwN)
+
+**[eliware.org on Discord](https://discord.gg/M6aTR9eTwN)**
+
 ## License
 
-MIT © Eli Sterling, eliware.org
+[MIT © Eli Sterling, eliware.org](LICENSE)
+
+## Links
+
+- [Home Page](https://eliware.org)
+- [GitHub Repo](https://github.com/eliware/mcp-server-template)
+- [GitHub Org](https://github.com/eliware)
+- [npm](https://www.npmjs.com/package/@eliware/mcp-server-template)
+- [Discord](https://discord.gg/M6aTR9eTwN)

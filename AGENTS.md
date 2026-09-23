@@ -4,6 +4,16 @@
 
 `@eliware/mcp-server-template` is a runnable MCP server template with tool discovery, Streamable HTTP/stdio modes, bearer authentication, Docker, Compose, and systemd support.
 
+## Scope and boundaries
+
+- This template owns its tools, examples, tests, packaging, and deployment examples.
+- Do not publish, tag, deploy, or expose a live server without explicit authorization.
+
+## Layout
+
+- `tools/` contains tool registrations; `examples/` contains runnable examples.
+- `.env.example`, Docker, Compose, and systemd files document deployment configuration.
+
 ## Development
 
 - Use Node.js 26 and native ESM.
@@ -14,6 +24,10 @@
 ## Validation
 
 Run `npm test`, `npm run test:gaps`, `npm run lint`, and the documented Docker/Kubernetes checks only in controlled environments. Do not expose the server unintentionally.
+
+## Security
+
+Never commit `.env`, MCP bearer tokens, private keys, or credential-bearing URLs.
 
 ## Changes
 
