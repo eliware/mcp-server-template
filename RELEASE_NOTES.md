@@ -2,8 +2,12 @@
 
 ## Unreleased
 
+### Changed
+
 - Describe pending changes here.
 
-## 1.1.0 - 2026-08-07
+## 1.1.0 — 2026-08-07
+
+### Added
 
 - Initial production-ready MCP server template.

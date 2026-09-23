@@ -1,0 +1,30 @@
+{
+  "version": "8.0",
+  "repositoryId": "eliware/mcp-server-template",
+  "description": "Repository-local authority record for the Eliware MCP server template.",
+  "subjects": [
+    {
+      "id": "mcp-server-template.implementation",
+      "kind": "repository-implementation",
+      "authority": { "path": "../" },
+      "directives": [{ "path": "./directives.json", "ids": ["E-1"] }],
+      "implementation": [
+        { "path": "../tools", "role": "MCP-tool-surface" },
+        {
+          "path": "../mcp-server-template.mjs",
+          "role": "MCP-server-entrypoint"
+        }
+      ],
+      "consumers": ["Projects derived from mcp-server-template"],
+      "reviewers": ["Eliware maintainers"],
+      "evidence": [],
+      "notAuthoritativeFor": [
+        "Eliware policy",
+        "operations",
+        "live MCP endpoints",
+        "publication authorization"
+      ],
+      "status": "active"
+    }
+  ]
+}

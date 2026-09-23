@@ -1,6 +1,8 @@
 # [![eliware.org](https://eliware.org/logos/brand.png)](https://discord.gg/M6aTR9eTwN)
 
-## @eliware/mcp-server-template [![npm version](https://img.shields.io/npm/v/@eliware/mcp-server-template.svg)](https://www.npmjs.com/package/@eliware/mcp-server-template)[![license](https://img.shields.io/github/license/eliware/mcp-server-template.svg)](LICENSE)[![build status](https://github.com/eliware/mcp-server-template/actions/workflows/nodejs.yml/badge.svg)](https://github.com/eliware/mcp-server-template/actions)
+## @eliware/mcp-server-template [![license](https://img.shields.io/github/license/eliware/mcp-server-template.svg)](LICENSE)[![build status](https://github.com/eliware/mcp-server-template/actions/workflows/nodejs.yml/badge.svg)](https://github.com/eliware/mcp-server-template/actions)
+
+Documentation: [docs](docs/README.md) · [specifications](specs/README.md) · [examples](examples/README.md) · [release notes](RELEASE_NOTES.md)
 
 Template for building a production-ready Model Context Protocol server with
 [`@eliware/mcp-server`](https://www.npmjs.com/package/@eliware/mcp-server).
@@ -38,7 +40,7 @@ Template for building a production-ready Model Context Protocol server with
 - Node.js 26 or newer
 - An MCP client for live HTTP/stdio operation
 
-## Getting Started
+## Setup
 
 ```bash
 npm install
@@ -52,6 +54,16 @@ The HTTP server listens on `MCP_HTTP_PORT` (default `1234`). Run stdio mode with
 ```bash
 node mcp-server-template.mjs --stdio
 ```
+
+## Usage
+
+Run the documented stdio or HTTP workflow locally. Do not expose an HTTP
+endpoint outside a controlled environment.
+
+## Development
+
+Add tools under `tools/` and preserve the documented schemas, transports, and
+authentication boundaries.
 
 ## Environment
 
@@ -84,7 +96,7 @@ export default async function registerTool({ mcpServer, toolName, log }) {
 
 The included `tools/echo.mjs` demonstrates the complete pattern.
 
-## Testing and Linting
+## Testing
 
 ```bash
 npm test
@@ -128,7 +140,7 @@ sudo systemctl enable --now mcp-server-template
 sudo systemctl status mcp-server-template
 ```
 
-## Errors / Troubleshooting
+## Troubleshooting
 
 This is a starter server, not a production deployment. Keep `MCP_TOKEN` in `.env` or secret storage, verify the `/mcp` endpoint and configured port, and use stdio only with controlled child processes. Review tools and context injection before deployment.
 

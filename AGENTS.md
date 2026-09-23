@@ -17,7 +17,9 @@
 ## Development
 
 - Use Node.js 26 and native ESM.
+- Read README.md, applicable specs, and the shared Docs, Conventions, and Operations authorities before changing files.
 - Keep tools under `tools/` and preserve the documented default-export tool contract.
+- Validate tool schemas and transport behavior when changing an MCP tool or server entrypoint.
 - Keep `MCP_TOKEN` and deployment credentials in `.env`; never commit secrets.
 - Preserve safe HTTP and stdio startup, shutdown, and container examples.
 
