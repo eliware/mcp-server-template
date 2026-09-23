@@ -1,59 +1,59 @@
 {
-    "name": "@eliware/mcp-server-template",
-    "type": "module",
-    "version": "1.1.0",
-    "description": "A Model Context Protocol (MCP) server template for building AI and automation tool APIs.",
-    "main": "mcp-server-template.mjs",
-    "scripts": {
-        "start": "node mcp-server-template.mjs",
-        "test": "npx --node-options=\"--experimental-vm-modules --no-warnings\" jest --detectOpenHandles --silent --coverage",
-        "test:gaps": "npm test 2>&1 | grep '|' | grep -vF '|     100 |      100 |     100 |     100 |'",
-        "lint": "npx oxlint .",
-        "pack": "npm pack --dry-run"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/eliware/mcp-server-template.git"
-    },
-    "keywords": [
-        "mcp-server",
-        "mcp-server-template",
-        "ai-tools",
-        "automation",
-        "nodejs",
-        "template"
-    ],
-    "author": "Eli Sterling, eliware.org <eli@eliware.org>",
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/eliware/mcp-server-template/issues"
-    },
-    "homepage": "https://github.com/eliware/mcp-server-template#readme",
-    "devDependencies": {
-        "jest": "^30.4.2"
-    },
-    "jest": {
-        "testEnvironment": "node",
-        "testMatch": [
-            "**/?(*.)+(spec|test).[jt]s?(x)",
-            "**/?(*.)+(spec|test).mjs"
-        ]
-    },
-    "dependencies": {
-        "@eliware/common": "^1.1.7",
-        "@eliware/mcp-server": "^1.1.8",
-        "dotenv": "^17.4.2"
-    },
-    "files": [
-        "mcp-server-template.mjs",
-        "src",
-        "tools",
-        "examples",
-        "mcp-server-template.service",
-        ".env.example",
-        "Dockerfile",
-        "docker-compose.yml",
-        "README.md",
-        "LICENSE"
+  "name": "@eliware/mcp-server-template",
+  "type": "module",
+  "version": "1.1.0",
+  "description": "A Model Context Protocol (MCP) server template for building AI and automation tool APIs.",
+  "main": "mcp-server-template.mjs",
+  "scripts": {
+    "start": "node mcp-server-template.mjs",
+    "test": "npx --node-options=\"--experimental-vm-modules --no-warnings\" jest --detectOpenHandles --silent --coverage",
+    "test:gaps": "npm test 2>&1 | grep '|' | grep -vF '|     100 |      100 |     100 |     100 |'",
+    "lint": "npx oxlint .",
+    "pack": "npm pack --dry-run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eliware/mcp-server-template.git"
+  },
+  "keywords": [
+    "mcp-server",
+    "mcp-server-template",
+    "ai-tools",
+    "automation",
+    "nodejs",
+    "template"
+  ],
+  "author": "Eli Sterling, eliware.org <eli@eliware.org>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/eliware/mcp-server-template/issues"
+  },
+  "homepage": "https://github.com/eliware/mcp-server-template#readme",
+  "devDependencies": {
+    "jest": "^30.4.2"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testMatch": [
+      "**/?(*.)+(spec|test).[jt]s?(x)",
+      "**/?(*.)+(spec|test).mjs"
     ]
+  },
+  "dependencies": {
+    "@eliware/common": "^1.1.7",
+    "@eliware/mcp-server": "^1.1.8",
+    "dotenv": "^17.4.2"
+  },
+  "files": [
+    "mcp-server-template.mjs",
+    "src",
+    "tools",
+    "examples",
+    "mcp-server-template.service",
+    ".env.example",
+    "Dockerfile",
+    "docker-compose.yml",
+    "README.md",
+    "LICENSE"
+  ]
 }

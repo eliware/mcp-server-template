@@ -55,11 +55,11 @@ node mcp-server-template.mjs --stdio
 
 ## Environment
 
-| Variable | Default | Description |
-| --- | --- | --- |
-| `MCP_TOKEN` | required | Static bearer token. |
-| `MCP_HTTP_PORT` | `1234` | HTTP listener port. |
-| `NODE_ENV` | unset | Set to `production` for deployment. |
+| Variable        | Default  | Description                         |
+| --------------- | -------- | ----------------------------------- |
+| `MCP_TOKEN`     | required | Static bearer token.                |
+| `MCP_HTTP_PORT` | `1234`   | HTTP listener port.                 |
+| `NODE_ENV`      | unset    | Set to `production` for deployment. |
 
 ## Adding Tools
 
@@ -67,12 +67,12 @@ Create a `.mjs` file in `tools/`. The default export receives the MCP server,
 tool name, logger, and any configured context:
 
 ```js
-import { buildResponse, z } from '@eliware/mcp-server';
+import { buildResponse, z } from "@eliware/mcp-server";
 
 export default async function registerTool({ mcpServer, toolName, log }) {
   mcpServer.tool(
     toolName,
-    'Describe the tool here.',
+    "Describe the tool here.",
     { text: z.string() },
     async (args) => {
       log.debug(`${toolName} request`, { args });
@@ -85,7 +85,6 @@ export default async function registerTool({ mcpServer, toolName, log }) {
 The included `tools/echo.mjs` demonstrates the complete pattern.
 
 ## Testing and Linting
-
 
 ```bash
 npm test
