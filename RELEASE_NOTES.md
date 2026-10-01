@@ -1,13 +1,9 @@
 # Release Notes
 
-## Unreleased
+## 9.0.0 — 2026-09-30
 
 ### Changed
 
-- Describe pending changes here.
-
-## 1.1.0 — 2026-08-07
-
-### Added
-
-- Initial production-ready MCP server template.
+- Align the MCP server template with the v9 application, MCP-server, and GHCR conventions.
+- Standardize package scripts, mirrored source tests, CI, Knit validation, documentation, and container publication.
+- Update runtime dependencies and remove stale example scaffolding.

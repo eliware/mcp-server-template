@@ -1,19 +1,19 @@
 {
   "name": "@eliware/mcp-server-template",
   "type": "module",
-  "version": "1.1.0",
+  "version": "9.0.0",
   "description": "A Model Context Protocol (MCP) server template for building AI and automation tool APIs.",
   "main": "mcp-server-template.mjs",
   "scripts": {
-    "start": "node mcp-server-template.mjs",
-    "test": "npx --node-options=\"--experimental-vm-modules --no-warnings\" jest --detectOpenHandles --silent --coverage",
-    "test:gaps": "npm test 2>&1 | grep '|' | grep -vF '|     100 |      100 |     100 |     100 |'",
-    "lint": "npx oxlint .",
-    "pack": "npm pack --dry-run"
+    "test": "eliware-test",
+    "lint": "eliware-test --lint",
+    "audit": "eliware-test --audit",
+    "format": "eliware-test --format",
+    "format:check": "eliware-test --format-check"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/eliware/mcp-server-template.git"
+    "url": "https://github.com/eliware/mcp-server-template"
   },
   "keywords": [
     "mcp-server",
@@ -25,26 +25,16 @@
   ],
   "author": "Eli Sterling, eliware.org <eli@eliware.org>",
   "license": "MIT",
+  "private": false,
+  "engines": {
+    "node": "26"
+  },
   "eliware": {
     "apply": [
       "general",
       "application",
-      "mcp-server"
-    ],
-    "authority": {
-      "authoritativeFor": [
-        "MCP server template structure and starter workflow."
-      ],
-      "notAuthoritativeFor": [
-        "Shared Eliware policy, operations, and publication authorization."
-      ]
-    },
-    "crosslinks": [
-      {
-        "path": "eliware/conventions",
-        "relationship": "relatedAuthority",
-        "authoritativeFor": "Applicable repository conventions."
-      }
+      "mcp-server",
+      "ghcr-published"
     ]
   },
   "bugs": {
@@ -52,30 +42,47 @@
   },
   "homepage": "https://github.com/eliware/mcp-server-template#readme",
   "devDependencies": {
-    "jest": "^30.4.2"
+    "@eliware/test": "^8.0.0"
   },
   "jest": {
     "testEnvironment": "node",
     "testMatch": [
-      "**/?(*.)+(spec|test).[jt]s?(x)",
-      "**/?(*.)+(spec|test).mjs"
-    ]
+      "**/tests/**/*.test.mjs"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.mjs"
+    ],
+    "coverageReporters": [
+      "text",
+      "json-summary"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "statements": 100,
+        "branches": 100,
+        "functions": 100,
+        "lines": 100
+      }
+    }
   },
   "dependencies": {
-    "@eliware/common": "^1.1.7",
-    "@eliware/mcp-server": "^1.1.8",
-    "dotenv": "^17.4.2"
+    "@eliware/common": "^2.0.0",
+    "@eliware/mcp-server": "^1.1.10",
+    "dotenv": "^18.0.5"
   },
-  "files": [
-    "mcp-server-template.mjs",
-    "src",
-    "tools",
-    "examples",
-    "mcp-server-template.service",
-    ".env.example",
-    "Dockerfile",
-    "docker-compose.yml",
-    "README.md",
-    "LICENSE"
-  ]
+  "prettier": {
+    "printWidth": 100,
+    "tabWidth": 2,
+    "useTabs": false,
+    "semi": true,
+    "singleQuote": false,
+    "quoteProps": "as-needed",
+    "jsxSingleQuote": false,
+    "trailingComma": "all",
+    "bracketSpacing": true,
+    "bracketSameLine": false,
+    "arrowParens": "always",
+    "proseWrap": "preserve",
+    "endOfLine": "lf"
+  }
 }

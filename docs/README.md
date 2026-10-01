@@ -1,15 +1,13 @@
 # Documentation
 
-This directory contains end-user documentation for projects derived from
-`@eliware/mcp-server-template`. The root [README](../README.md) documents
-tools, transports, authentication, deployment, and validation.
+## Purpose
+
+Scope: this directory indexes end-user documentation for projects derived from @eliware/mcp-server-template. The root README documents tools, transports, authentication, validation, and deployment boundaries.
 
 ## Contents
 
 - [Root README](../README.md)
-- [Examples](../examples/README.md)
+- [Specifications](../specs/README.md)
 - [Release notes](../RELEASE_NOTES.md)
 
-## Validation
-
-Keep links current and add each new end-user document to this index.
+Setup: create a private-to-the-operator derived server, set its environment, and run npm ci. Usage: follow the transport instructions in the root README. Support: use the community link in the root README.
