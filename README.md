@@ -1,6 +1,6 @@
 # [![eliware.org](https://eliware.org/logos/brand.png)](https://discord.gg/M6aTR9eTwN)
 
-## @eliware/mcp-server-template [![license](https://img.shields.io/github/license/eliware/mcp-server-template.svg)](LICENSE) [![CI](https://github.com/eliware/mcp-server-template/actions/workflows/ci.yml/badge.svg)](https://github.com/eliware/mcp-server-template/actions/workflows/ci.yml)
+## @eliware/mcp-server-template [![License](https://img.shields.io/github/license/eliware/mcp-server-template)](https://github.com/eliware/mcp-server-template/blob/main/LICENSE) [![CI](https://github.com/eliware/mcp-server-template/actions/workflows/ci.yml/badge.svg)](https://github.com/eliware/mcp-server-template/actions/workflows/ci.yml)
 
 ## Table of Contents
 
@@ -26,9 +26,11 @@
 
 ## Features
 
-A Model Context Protocol (MCP) server template for building AI and automation tool APIs. It includes dynamic tool discovery, Streamable HTTP and stdio transports, bearer-token authentication, and Docker and systemd examples.
+This template owns a reusable MCP server baseline; each derived server owns its tool contracts, authentication decisions, and runtime behavior.
 
-Package description: A Model Context Protocol (MCP) server template for building AI and automation tool APIs. Author: Eli Sterling, eliware.org <eli@eliware.org>. License: MIT.
+Package description: A Model Context Protocol (MCP) server template for building AI and automation tool APIs. Author: Eliware <eliware@eliware.org>. License: MIT.
+
+A Model Context Protocol (MCP) server template for building AI and automation tool APIs. It includes dynamic tool discovery, Streamable HTTP and stdio transports, bearer-token authentication, and Docker and systemd examples.
 
 ## Requirements
 
@@ -45,6 +47,8 @@ Run node mcp-server-template.mjs for the HTTP server. Run node mcp-server-templa
 ## Development
 
 Read AGENTS.md, specs/README.md, and applicable shared conventions before changing the template. Keep tool implementation modules under src/tools/ and their root discovery adapters under tools/.
+
+Documentation: [docs](docs/README.md) · [specifications](specs/README.md)
 
 ## Testing
 
@@ -104,10 +108,12 @@ For help or discussion, join the Eliware community:
 
 ## Links
 
-- Documentation: [docs](docs/README.md) · [specifications](specs/README.md) · [release notes](RELEASE_NOTES.md)
-- [Canonical repository profile specifications](https://github.com/eliware/test/blob/main/specs/conventions/README.md)
-- [Home Page](https://eliware.org)
-- [GitHub Repo](https://github.com/eliware/mcp-server-template) (`git+https://github.com/eliware/mcp-server-template.git`)
-- [GitHub Org](https://github.com/eliware)
-- [Eli Sterling on GitHub](https://github.com/eli-sterling)
+- [docs](docs/README.md)
+- [Home Page](https://github.com/eliware/mcp-server-template#readme)
+- [GitHub repository](https://github.com/eliware/mcp-server-template.git)
+- [Eliware](https://eliware.org)
+- [GitHub organization](https://github.com/eliware)
 - [Discord](https://discord.gg/M6aTR9eTwN)
+- [Documentation](https://github.com/eliware/docs/blob/main/repo-map.yaml)
+- [specifications](specs/README.md)
+- [Release Notes](RELEASE_NOTES.md)
