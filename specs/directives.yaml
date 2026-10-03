@@ -1,0 +1,9 @@
+version: "11.0"
+description: Repository-specific directives for the Eliware MCP server template.
+directives:
+  - id: E-1040
+    dos:
+      - Provide a reusable MCP server application baseline with dynamically discovered root-level tool adapters, HTTP and stdio transports, bearer-token authentication, mirrored tests, and documented behavior.
+      - Replace the template identity and package metadata when creating a derived MCP server.
+    donts:
+      - Do not publish template placeholder behavior as a finished MCP service or expose a live endpoint without authorization.

@@ -10,13 +10,15 @@ Scope: this repository owns its MCP server template, tool behavior, tests, packa
 
 ## Layout
 
-Required structure: mcp-server-template.mjs is the runtime entrypoint; src/ contains implementation and tests/ mirrors it. tools/ contains the root-level tool modules discovered by @eliware/mcp-server. docs/ contains end-user documentation, specs/ contains repository-specific directives, and .knit/deploy.yaml defines development validation.
+Required structure: bin/mcp-server-template.mjs is the runtime entrypoint; src/ contains implementation and tests/ mirrors it. tools/ contains the root-level tool modules discovered by @eliware/mcp-server. docs/ contains end-user documentation, specs/ contains repository-specific directives, and .knit/deploy.yaml defines development validation.
 
 ## Development
 
+Before changing files, read the root README.md, applicable AGENTS.md instructions, applicable documentation, and applicable specifications.
+
 This Development guidance applies repository-wide; nearer AGENTS.md instructions apply within subdirectories. Use Node.js 26, npm, and native ESM .mjs modules. Read README.md, applicable specifications, implementation, and tests before changing behavior. Every source and test module must have a single responsibility: one cohesive purpose and one reason to change. Business-logic modules and coordinators are valid, including coordinators of coordinators, when each module does only its own responsibility. When a change introduces a distinct responsibility, create a focused submodule with a mirrored test and wire it through its owner; do not add the new responsibility to an existing module. During ordinary review, refactor them when you notice mixed responsibilities. The 100-line source and 200-line test maxima are blocking. Passing them does not prove cohesion or permit mixed responsibilities.
 
-The required files include README.md, AGENTS.md, package.json, LICENSE, RELEASE_NOTES.md, docs/README.md, specs/README.md, specs/directives.json, .knit/deploy.yaml, .github/workflows/ci.yml, and .github/workflows/publish.yml.
+The required files include README.md, AGENTS.md, package.json, LICENSE, RELEASE_NOTES.md, docs/README.md, specs/README.md, specs/directives.yaml, .knit/deploy.yaml, .github/workflows/ci.yaml, and .github/workflows/publish.yaml.
 
 ## Validation
 
@@ -32,7 +34,7 @@ Keep instructions actionable, current, and concise. Project-specific rules may a
 
 ## Application
 
-The application entrypoint is mcp-server-template.mjs and application implementation is under src/. The server supports HTTP and stdio modes. Validate configuration before opening listeners, and close transports and process handlers during shutdown. The safe operational boundaries exclude unintended network exposure. Runtime configuration comes from environment variables and is listed in .env.example.
+The application entrypoint is bin/mcp-server-template.mjs and application implementation is under src/. The server supports HTTP and stdio modes. Validate configuration before opening listeners, and close transports and process handlers during shutdown. The safe operational boundaries exclude unintended network exposure. Runtime configuration comes from environment variables and is listed in .env.example.
 
 ## MCP server
 
@@ -40,4 +42,4 @@ Tools are discovered from the root tools/ directory and must follow the default-
 
 ## GHCR publication
 
-The public image is ghcr.io/eliware/mcp-server-template. Its visibility is public after publication. .github/workflows/publish.yml publishes version-tagged images after validation, attests the image with GitHub provenance, and verifies the pushed digest. GitHub token credentials are used only by that workflow. Publication does not deploy the image; deployment requires a separate GitOps handoff.
+The public image is ghcr.io/eliware/mcp-server-template. Its visibility is public after publication. .github/workflows/publish.yaml publishes version-tagged images after validation, attests the image with GitHub provenance, and verifies the pushed digest. GitHub token credentials are used only by that workflow. Publication does not deploy the image; deployment requires a separate GitOps handoff.

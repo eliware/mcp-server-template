@@ -1,9 +1,9 @@
 {
   "name": "@eliware/mcp-server-template",
   "type": "module",
-  "version": "10.0.0",
+  "version": "11.0.0",
   "description": "A Model Context Protocol (MCP) server template for building AI and automation tool APIs.",
-  "main": "mcp-server-template.mjs",
+  "main": "./bin/mcp-server-template.mjs",
   "scripts": {
     "test": "eliware-test",
     "lint": "eliware-test --lint",

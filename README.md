@@ -1,6 +1,6 @@
 # [![eliware.org](https://eliware.org/logos/brand.png)](https://discord.gg/M6aTR9eTwN)
 
-## @eliware/mcp-server-template [![License](https://img.shields.io/github/license/eliware/mcp-server-template)](https://github.com/eliware/mcp-server-template/blob/main/LICENSE) [![CI](https://github.com/eliware/mcp-server-template/actions/workflows/ci.yml/badge.svg)](https://github.com/eliware/mcp-server-template/actions/workflows/ci.yml)
+## @eliware/mcp-server-template [![License](https://img.shields.io/github/license/eliware/mcp-server-template)](https://github.com/eliware/mcp-server-template/blob/main/LICENSE) [![CI](https://github.com/eliware/mcp-server-template/actions/workflows/ci.yaml/badge.svg)](https://github.com/eliware/mcp-server-template/actions/workflows/ci.yaml)
 
 ## Table of Contents
 
@@ -42,7 +42,12 @@ Create a repository from this template, replace the package identity and reposit
 
 ## Usage
 
-Run node mcp-server-template.mjs for the HTTP server. Run node mcp-server-template.mjs --stdio to use stdio transport. Keep HTTP access limited to the intended clients.
+Run node bin/mcp-server-template.mjs for the HTTP server. Run node bin/mcp-server-template.mjs --stdio to use stdio transport. Keep HTTP access limited to the intended clients.
+
+Image: ghcr.io/eliware/mcp-server-template
+Pull command: docker pull ghcr.io/eliware/mcp-server-template:v11.0.0
+Supported tags: vMAJOR.MINOR.PATCH
+Deployment boundary: publication does not deploy; deploy by immutable version tag and recorded sha256 digest.
 
 ## Development
 
@@ -68,7 +73,7 @@ Startup validates MCP_TOKEN before opening a listener. Shutdown closes active tr
 
 ## Operations
 
-Startup runs the HTTP server on MCP_HTTP_PORT and requires MCP_TOKEN. The externally observable workflows are HTTP requests and stdio requests; shutdown closes active transports. The operational boundaries prohibit unintended network exposure. The operational boundaries are limited to the documented HTTP and stdio workflows. Stdio mode does not open an HTTP listener. Docker, Compose, and systemd examples are provided for controlled environments. The template does not deploy itself. The GHCR image is ghcr.io/eliware/mcp-server-template; pull a released image with docker pull ghcr.io/eliware/mcp-server-template:v9.0.0. Only version tags identify releases. After publication, use a separate Operations release handoff and a separate GitOps deployment handoff for any rollout.
+Startup runs the HTTP server on MCP_HTTP_PORT and requires MCP_TOKEN. The externally observable workflows are HTTP requests and stdio requests; shutdown closes active transports. The operational boundaries prohibit unintended network exposure. The operational boundaries are limited to the documented HTTP and stdio workflows. Stdio mode does not open an HTTP listener. Docker, Compose, and systemd examples are provided for controlled environments. The template does not deploy itself. The GHCR image is ghcr.io/eliware/mcp-server-template; pull a released image with docker pull ghcr.io/eliware/mcp-server-template:v11.0.0. Only version tags identify releases. After publication, use a separate Operations release handoff and a separate GitOps deployment handoff for any rollout.
 
 ## Tools
 

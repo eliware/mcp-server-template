@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { startServer } from "./src/runtime.mjs";
+import { startServer } from "../src/runtime.mjs";
 
 try {
   await startServer();
