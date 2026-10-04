@@ -43,7 +43,7 @@
   },
   "homepage": "https://github.com/eliware/mcp-server-template#readme",
   "devDependencies": {
-    "@eliware/test": "^10.0.0"
+    "@eliware/test": "^11.0.0"
   },
   "jest": {
     "testEnvironment": "node",
