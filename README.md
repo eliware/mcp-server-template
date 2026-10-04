@@ -1,6 +1,6 @@
 # [![eliware.org](https://eliware.org/logos/brand.png)](https://discord.gg/M6aTR9eTwN)
 
-## @eliware/mcp-server-template [![License](https://img.shields.io/github/license/eliware/mcp-server-template)](https://github.com/eliware/mcp-server-template/blob/main/LICENSE) [![CI](https://github.com/eliware/mcp-server-template/actions/workflows/ci.yaml/badge.svg)](https://github.com/eliware/mcp-server-template/actions/workflows/ci.yaml)
+@eliware/mcp-server-template [![License](https://img.shields.io/github/license/eliware/mcp-server-template)](https://github.com/eliware/mcp-server-template/blob/main/LICENSE) [![CI](https://github.com/eliware/mcp-server-template/actions/workflows/ci.yaml/badge.svg)](https://github.com/eliware/mcp-server-template/actions/workflows/ci.yaml)
 
 ## Table of Contents
 
