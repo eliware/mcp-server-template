@@ -1,6 +1,8 @@
 # [![eliware.org](https://eliware.org/logos/brand.png)](https://discord.gg/M6aTR9eTwN)
 
-@eliware/mcp-server-template [![License](https://img.shields.io/github/license/eliware/mcp-server-template)](https://github.com/eliware/mcp-server-template/blob/main/LICENSE) [![CI](https://github.com/eliware/mcp-server-template/actions/workflows/ci.yaml/badge.svg)](https://github.com/eliware/mcp-server-template/actions/workflows/ci.yaml)
+## @eliware/mcp-server-template [![License](https://img.shields.io/github/license/eliware/mcp-server-template)](https://github.com/eliware/mcp-server-template/blob/main/LICENSE) [![CI](https://github.com/eliware/mcp-server-template/actions/workflows/ci.yaml/badge.svg)](https://github.com/eliware/mcp-server-template/actions/workflows/ci.yaml)
+
+A Model Context Protocol (MCP) server template for building AI and automation tool APIs.
 
 ## Table of Contents
 
@@ -21,20 +23,18 @@
 - [Authentication](#authentication)
 - [Schemas](#schemas)
 - [Support](#support)
-- [License](#license)
 - [Links](#links)
+- [License](#license)
 
 ## Features
 
 This template owns a reusable MCP server baseline; each derived server owns its tool contracts, authentication decisions, and runtime behavior.
 
-Package description: A Model Context Protocol (MCP) server template for building AI and automation tool APIs. Author: Eliware <eliware@eliware.org>. License: MIT.
-
 A Model Context Protocol (MCP) server template for building AI and automation tool APIs. It includes dynamic tool discovery, Streamable HTTP and stdio transports, bearer-token authentication, and Docker and systemd examples.
 
 ## Requirements
 
-Use Node.js 26 and npm. An MCP client is required to exercise a running server.
+Use Node.js 26 or later and npm. An MCP client is required to exercise a running server.
 
 ## Setup
 
@@ -48,6 +48,8 @@ Image: ghcr.io/eliware/mcp-server-template
 Pull command: docker pull ghcr.io/eliware/mcp-server-template:v11.0.0
 Supported tags: vMAJOR.MINOR.PATCH
 Deployment boundary: publication does not deploy; deploy by immutable version tag and recorded sha256 digest.
+
+Read [RELEASE_NOTES.md](RELEASE_NOTES.md) for release history.
 
 ## Development
 
@@ -101,23 +103,20 @@ Tool input schemas use Zod definitions provided by @eliware/mcp-server. Validate
 
 ## Support
 
-For help or discussion, join the Eliware community:
+For help, questions, or to chat with the author and community, visit:
 
-[![Discord](https://eliware.org/logos/discord_96.png)](https://discord.gg/M6aTR9eTwN)
+[![Discord](https://eliware.org/logos/discord_96.png)](https://discord.gg/M6aTR9eTwN)[![eliware.org](https://eliware.org/logos/eliware_96.png)](https://discord.gg/M6aTR9eTwN)
 
 **[eliware.org on Discord](https://discord.gg/M6aTR9eTwN)**
 
-## License
-
-[license](LICENSE)
-
 ## Links
 
-- [docs](docs/README.md)
-- [Home Page](https://github.com/eliware/mcp-server-template#readme)
-- [GitHub repository](https://github.com/eliware/mcp-server-template.git)
-- [Eliware](https://eliware.org)
-- [GitHub organization](https://github.com/eliware)
+- [Home Page](https://eliware.org)
+- [GitHub Org](https://github.com/eliware)
+- [GitHub Repo](https://github.com/eliware/mcp-server-template)
+- [Bug Reports](https://github.com/eliware/mcp-server-template/issues)
 - [Discord](https://discord.gg/M6aTR9eTwN)
-- [specifications](specs/README.md)
-- [Release Notes](RELEASE_NOTES.md)
+
+## License
+
+[MIT © Eliware](LICENSE)

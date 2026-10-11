@@ -23,9 +23,6 @@ logs/
 *.seed
 
 # Environment secrets
-.env
-.env.*
-!.env.example
 
 # Machine-specific files
 .vscode/
@@ -35,3 +32,7 @@ Thumbs.db
 
 # Local agent state
 .agentx*
+generated/
+test-results/
+.env*
+!.env*.example

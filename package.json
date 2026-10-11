@@ -1,20 +1,8 @@
 {
   "name": "@eliware/mcp-server-template",
+  "version": "12.0.0",
   "type": "module",
-  "version": "11.0.0",
   "description": "A Model Context Protocol (MCP) server template for building AI and automation tool APIs.",
-  "main": "./bin/mcp-server-template.mjs",
-  "scripts": {
-    "test": "eliware-test",
-    "lint": "eliware-test --lint",
-    "audit": "eliware-test --audit",
-    "format": "eliware-test --format",
-    "format:check": "eliware-test --format-check"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/eliware/mcp-server-template.git"
-  },
   "keywords": [
     "mcp-server",
     "mcp-server-template",
@@ -23,25 +11,23 @@
     "nodejs",
     "template"
   ],
-  "author": "Eliware <eliware@eliware.org>",
-  "license": "MIT",
   "private": false,
+  "main": "./bin/mcp-server-template.mjs",
+  "scripts": {
+    "test": "eliware-test",
+    "lint": "eliware-test --lint",
+    "audit": "eliware-test --audit",
+    "format": "eliware-test --format",
+    "format:check": "eliware-test --format-check"
+  },
   "engines": {
-    "node": "26"
+    "node": ">=26"
   },
-  "eliware": {
-    "id": "E-1040",
-    "apply": [
-      "general",
-      "application",
-      "mcp-server",
-      "ghcr-published"
-    ]
+  "dependencies": {
+    "@eliware/common": "^2.0.0",
+    "@eliware/mcp-server": "^1.1.10",
+    "dotenv": "^18.0.5"
   },
-  "bugs": {
-    "url": "https://github.com/eliware/mcp-server-template/issues"
-  },
-  "homepage": "https://github.com/eliware/mcp-server-template#readme",
   "devDependencies": {
     "@eliware/test": "^11.0.0"
   },
@@ -66,11 +52,6 @@
       }
     }
   },
-  "dependencies": {
-    "@eliware/common": "^2.0.0",
-    "@eliware/mcp-server": "^1.1.10",
-    "dotenv": "^18.0.5"
-  },
   "prettier": {
     "printWidth": 100,
     "tabWidth": 2,
@@ -85,5 +66,24 @@
     "arrowParens": "always",
     "proseWrap": "preserve",
     "endOfLine": "lf"
+  },
+  "author": "Eliware <eliware@eliware.org>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eliware/mcp-server-template.git"
+  },
+  "homepage": "https://github.com/eliware/mcp-server-template#readme",
+  "bugs": {
+    "url": "https://github.com/eliware/mcp-server-template/issues"
+  },
+  "eliware": {
+    "id": "E-1040",
+    "apply": [
+      "general",
+      "application",
+      "mcp-server",
+      "ghcr-published"
+    ]
   }
 }

@@ -1,7 +1,3 @@
-import "dotenv/config";
-import { createLogger, registerHandlers, registerSignals } from "@eliware/common";
-import { mcpServer } from "@eliware/mcp-server";
-
 export const closeServer = (server) =>
   new Promise((resolve, reject) => {
     if (!server?.close) return resolve();
@@ -15,9 +11,12 @@ export const closeServer = (server) =>
 export async function startServer({
   env = process.env,
   argv = process.argv,
+  createLogger,
+  registerHandlers,
+  registerSignals,
+  createServer,
   logger = createLogger({ level: env.LOG_LEVEL || "info" }),
-  createServer = mcpServer,
-} = {}) {
+}) {
   const errors = registerHandlers({ log: logger });
   const token = env.MCP_TOKEN;
   if (!token) {

@@ -4,7 +4,13 @@
 
 ### Changed
 
-- Continue maintaining the template under v11 conventions; this working package version does not assert registry publication.
+- Continue maintaining the template under v12 conventions; this working package version does not assert registry publication.
+
+## 12.0.0 — 2026-10-11
+
+### Changed
+
+- Align template metadata, documentation, and checks with v12 conventions.
 
 ## 11.0.0 — 2026-10-03
 
