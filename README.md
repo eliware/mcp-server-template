@@ -47,7 +47,6 @@ Follow this README and the [user guide](docs/README.md). Read [release notes](RE
 
 Read [AGENTS.md](AGENTS.md) and [the specifications index](specs/README.md) before you change files.
 Keep documents and records in the repository that owns them.
-Read [release notes](RELEASE_NOTES.md) for release history.
 
 ## Testing
 
