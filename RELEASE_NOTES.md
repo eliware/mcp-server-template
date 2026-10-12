@@ -1,34 +1,16 @@
 # Release Notes
 
-## Unreleased
+## 12.0.0 — 2026-10-12
 
 ### Changed
 
-- Continue maintaining the template under v12 conventions; this working package version does not assert registry publication.
-
-## 12.0.0 — 2026-10-11
-
-### Changed
-
-- Align template metadata, documentation, and checks with v12 conventions.
+- Align package metadata, documentation, and validation with v12 conventions.
+- Update shared packages and container validation workflows.
+- Document HTTP and stdio setup, authentication, tools, and deployment limits.
+- Keep HTTP access behind an approved boundary.
 
 ## 11.0.0 — 2026-10-03
 
 ### Changed
 
 - Align repository metadata, documentation, specifications, and workflows with the v11 conventions.
-
-## 10.0.0 — 2026-10-02
-
-### Changed
-
-- Align the template metadata, branding, documentation links, and structured specifications with the v10 repository conventions.
-- Record package version 10.0.0 as an unpublished candidate pending the Eliware Test v10 package release.
-
-## 9.0.0 — 2026-09-30
-
-### Changed
-
-- Align the MCP server template with the v9 application, MCP-server, and GHCR conventions.
-- Standardize package scripts, mirrored source tests, CI, Knit validation, documentation, and container publication.
-- Update runtime dependencies and remove stale example scaffolding.
