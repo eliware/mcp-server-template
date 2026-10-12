@@ -2,51 +2,57 @@
 
 ## Project
 
-Repository: eliware/mcp-server-template. Purpose: provide a reusable Model Context Protocol server application template.
+This repository is `eliware/mcp-server-template`.
+
+It starts Model Context Protocol servers.
 
 ## Scope and boundaries
 
-Scope: this repository owns its MCP server template, tool behavior, tests, package metadata, documentation, and container/service examples. It does not own shared Eliware requirements, credentials, or production release and deployment execution. This AGENTS.md applies repository-wide; nearer AGENTS.md instructions apply within subdirectories.
+Use README.md for repository purpose, scope, and ownership.
 
 ## Layout
 
-Required structure: bin/mcp-server-template.mjs is the runtime entrypoint; src/ contains implementation and tests/ mirrors it. tools/ contains the root-level tool modules discovered by @eliware/mcp-server. docs/ contains end-user documentation, specs/ contains repository-specific directives, and .knit/deploy.yaml defines development validation.
+Use README.md and specs/README.md to find repository files.
 
 ## Development
 
-Before changing files, read the root README.md, applicable AGENTS.md instructions, applicable documentation, and applicable specifications.
-
-This Development guidance applies repository-wide; nearer AGENTS.md instructions apply within subdirectories. Use Node.js 26 or later, npm, and native ESM .mjs modules. Read README.md, applicable specifications, implementation, and tests before changing behavior. Every source and test module must have a single responsibility: one cohesive purpose and one reason to change. Business-logic modules and coordinators are valid, including coordinators of coordinators, when each module does only its own responsibility. When a change introduces a distinct responsibility, create a focused submodule with a mirrored test and wire it through its owner; do not add the new responsibility to an existing module. During ordinary review, refactor them when you notice mixed responsibilities. The 100-line source and 200-line test maxima are blocking. Passing them does not prove cohesion or permit mixed responsibilities.
-
-The required files include README.md, AGENTS.md, package.json, LICENSE, RELEASE_NOTES.md, docs/README.md, specs/README.md, specs/directives.yaml, .knit/deploy.yaml, .github/workflows/ci.yaml, and .github/workflows/publish.yaml.
+Keep each source and test module focused on one responsibility.
 
 ## Validation
 
-Use `npm run lint`, `npm run audit`, `npm run format`, and `npm run format:check` as needed.
-
-Use Node.js 26 or later with npm. Runtime settings are MCP_TOKEN, MCP_HTTP_PORT, and LOG_LEVEL from the environment; package.json and .knit/deploy.yaml are not runtime configuration. Run npm ci after dependency changes and npm test before handoff. Aggregate validation runs Jest with 100% statement, branch, function, and line coverage, lint, format-check, audit, and applicable profile checks through eliware-test. CI runs npm ci followed by npm test.
+Use Node.js 26 or later and npm 12 or later.
+Use native ESM for maintained JavaScript modules.
+Run `npm test` for aggregate validation.
+Run `npm run lint` for lint checks.
+Run `npm run audit` for dependency checks.
+Run `npm run format` to format files.
+Run `npm run format:check` to check formatting.
 
 ## Security
 
-Keep credentials, tokens, and machine-specific files out of version control. Use an untracked .env file or an authorized secret store. The public container image must not contain secrets. Restrict network exposure and tool permissions.
+Keep credentials, secret values, private data, and runtime state out of Git.
 
 ## Changes
 
-Keep instructions actionable, current, and concise. Project-specific rules may add requirements without weakening shared rules unless authorized. A documented deviation does not waive any convention ID or validation stage. Do not publish, release, deploy, or modify external systems without explicit authorization through the applicable Operations handoff.
+Keep changes within this repository scope.
+Use Eliware Operations for approval before external changes.
 
 ## Application
 
-The application entrypoint is bin/mcp-server-template.mjs and application implementation is under src/. The server supports HTTP and stdio modes. Validate configuration before opening listeners, and close transports and process handlers during shutdown. The safe operational boundaries exclude unintended network exposure. Runtime configuration comes from environment variables and is listed in .env.example.
+Document entrypoints, workflows, settings, startup, and shutdown in README.md.
 
 ## MCP server
 
-Tools are discovered from the root tools/ directory and must follow the default-export registration contract. This starter defines no resources or prompts. The server supports Streamable HTTP and stdio transports with static bearer-token authentication. Validate tool schemas and protocol behavior. Preserve safe operational boundaries and do not expose a live endpoint unintentionally.
+Document tools, schemas, transports, authentication, and side effects in README.md.
 
 ## GHCR publication
 
-The public image is ghcr.io/eliware/mcp-server-template. Its visibility is public after publication. .github/workflows/publish.yaml publishes version-tagged images after validation, attests the image with GitHub provenance, and verifies the pushed digest. GitHub token credentials are used only by that workflow. Publication does not deploy the image; deployment requires a separate GitOps handoff.
-
 Image: ghcr.io/eliware/mcp-server-template
+
 Pull command: docker pull ghcr.io/eliware/mcp-server-template:v12.0.0
+
 Supported tags: vMAJOR.MINOR.PATCH
+
 Deployment boundary: publication does not deploy; deploy by immutable version tag and recorded sha256 digest.
+
+Document image purpose, access, and deployment use in README.md.
