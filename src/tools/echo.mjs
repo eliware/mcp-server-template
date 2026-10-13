@@ -1,4 +1,5 @@
-import { z, buildResponse } from "@eliware/mcp-server";
+import { z } from "@eliware/mcp-server";
+import { buildResponse } from "@eliware/mcp-server/utilities";
 
 export default async function ({ mcpServer, toolName, log }) {
   mcpServer.tool(toolName, "Echo Tool", { echoText: z.string() }, async (_args, _extra) => {
