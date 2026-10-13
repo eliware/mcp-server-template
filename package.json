@@ -12,7 +12,20 @@
     "template"
   ],
   "private": false,
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
   "main": "./bin/mcp-server-template.mjs",
+  "files": [
+    "src/",
+    "docs/",
+    "README.md",
+    "AGENTS.md",
+    "LICENSE",
+    "RELEASE_NOTES.md",
+    "bin/"
+  ],
   "scripts": {
     "test": "eliware-test",
     "lint": "eliware-test --lint",
