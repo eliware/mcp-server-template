@@ -40,6 +40,10 @@ Use Eliware Operations for approval before external changes.
 ## Application
 
 Document entrypoints, workflows, settings, startup, and shutdown in README.md.
+For a small change, run one or more focused tests.
+Run one test file with `npm test -- tests/path/to/example.test.mjs`.
+Run multiple test files with `npm test -- tests/path/to/first.test.mjs tests/path/to/second.test.mjs`.
+Run the full `npm test` suite before a commit or milestone.
 
 ## MCP server
 
