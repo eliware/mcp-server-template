@@ -2,18 +2,27 @@
 
 ## 13.0.0 — 2026-10-17
 
+### Added
+
+- Add a GHCR workflow that publishes signed container images.
+- Add a lifecycle module that closes Fastify apps and stdio transports.
+
 ### Changed
 
-- Close Fastify and stdio transports through the lifecycle module.
-- Combine default and configured HTTP startup cases in one runtime test.
-- Keep echo response construction in the tool handler and verify it through the adapter test.
-- Align repository guidance, MCP documentation, and directives with v13 conventions.
-- Publish GHCR images through the canonical workflow with signed attestations.
-- Update CI tag validation and Knit deployment commands.
+- Set the template version to 13.0.0, upgrade `@eliware/mcp-server` to v13, refresh dotenv, and sync the lock file.
+- Use `PORT` for the HTTP listener and keep `MCP_TOKEN` for HTTP authentication.
 - Allow stdio startup without an HTTP bearer token.
-- Document protocol revision, environment settings, container ports, health checks, and deployment steps.
+- Close the active Fastify app or stdio transport during shutdown.
+- Keep echo response construction in the tool handler and test it through the adapter.
+- Combine default and configured HTTP startup checks in one runtime test.
+- Mock the server schema API in the echo test. The test then loads fewer modules.
+- Align repository instructions, documentation, and directives with v13 conventions.
+- Document protocol revision `2026-07-28`, environment variables, container listener mapping, health checks, and deployment steps.
+- Update CI tag validation and fetch full Git history for tag checks.
+- Update GHCR publishing and Knit deployment commands. The deploy workflow pulls repository changes.
 - Use concise runtime status messages.
-- Mock the server schema API in the echo test. The test then loads fewer server modules.
+- Replace callback-based closing with async shutdown of the active Fastify app or stdio transport.
+- Replace `publish.yaml` with the canonical `ghcr.yaml` workflow.
 
 ## 12.0.0 — 2026-10-12
 
