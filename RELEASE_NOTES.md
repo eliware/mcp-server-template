@@ -9,6 +9,7 @@
 - Update CI tag validation and Knit deployment commands.
 - Clarify tool, transport, token, and deployment guidance.
 - Use concise runtime status messages.
+- Mock the server schema API in the echo test. The test then loads fewer server modules.
 
 ## 12.0.0 — 2026-10-12
 
