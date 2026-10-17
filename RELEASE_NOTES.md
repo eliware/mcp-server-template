@@ -4,6 +4,8 @@
 
 ### Changed
 
+- Separate echo response construction from MCP tool registration.
+- Test echo response construction directly and preserve adapter integration coverage.
 - Align repository guidance, MCP documentation, and directives with v13 conventions.
 - Publish GHCR images through the canonical workflow with signed attestations.
 - Update CI tag validation and Knit deployment commands.
