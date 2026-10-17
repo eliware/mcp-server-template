@@ -4,8 +4,9 @@
 
 ### Changed
 
-- Separate echo response construction from MCP tool registration.
-- Test echo response construction directly and preserve adapter integration coverage.
+- Move server close compatibility handling into a lifecycle module.
+- Combine default and configured HTTP startup checks in one runtime test.
+- Keep echo response construction in the tool handler and verify it through adapter integration coverage.
 - Align repository guidance, MCP documentation, and directives with v13 conventions.
 - Publish GHCR images through the canonical workflow with signed attestations.
 - Update CI tag validation and Knit deployment commands.

@@ -1,12 +1,4 @@
-export const closeServer = (server) =>
-  new Promise((resolve, reject) => {
-    if (!server?.close) return resolve();
-    if (server.close.length === 0) {
-      Promise.resolve(server.close()).then(resolve, reject);
-      return;
-    }
-    server.close((error) => (error ? reject(error) : resolve()));
-  });
+import { closeServer } from "./server-lifecycle.mjs";
 
 export async function startServer({
   env = process.env,

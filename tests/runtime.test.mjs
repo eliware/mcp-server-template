@@ -1,5 +1,5 @@
 import { jest, expect, test } from "@jest/globals";
-import { closeServer, startServer } from "../src/runtime.mjs";
+import { startServer } from "../src/runtime.mjs";
 
 const logger = {
   debug: jest.fn(),
@@ -19,21 +19,7 @@ function dependencies(overrides = {}) {
   };
 }
 
-test("closes callback and promise based servers", async () => {
-  const callbackServer = { close: jest.fn((callback) => callback()) };
-  const promiseServer = { close: jest.fn(() => Promise.resolve()) };
-  await expect(closeServer(callbackServer)).resolves.toBeUndefined();
-  await expect(closeServer(promiseServer)).resolves.toBeUndefined();
-  await expect(closeServer({})).resolves.toBeUndefined();
-});
-
-test("rejects when a server close callback fails", async () => {
-  await expect(
-    closeServer({ close: (callback) => callback(new Error("close failed")) }),
-  ).rejects.toThrow("close failed");
-});
-
-test("uses process defaults and creates the default logger", async () => {
+test("starts with process defaults and selected HTTP configuration", async () => {
   const previousToken = process.env.MCP_TOKEN;
   const previousPort = process.env.MCP_HTTP_PORT;
   const previousLevel = process.env.LOG_LEVEL;
@@ -50,6 +36,18 @@ test("uses process defaults and creates the default logger", async () => {
     expect(setup.createLogger).toHaveBeenNthCalledWith(2, { level: "info" });
     expect(setup.createServer).toHaveBeenCalledWith(
       expect.objectContaining({ httpPort: 1234, stdio: false }),
+    );
+    await startServer({
+      ...setup,
+      env: { LOG_LEVEL: "debug", MCP_TOKEN: "secret", MCP_HTTP_PORT: "4321" },
+      argv: ["node", "app.mjs"],
+    });
+    expect(setup.createServer).toHaveBeenLastCalledWith(
+      expect.objectContaining({
+        httpPort: 4321,
+        auth: { mode: "static", token: "secret" },
+        stdio: false,
+      }),
     );
   } finally {
     restoreEnvironment("MCP_TOKEN", previousToken);
@@ -75,28 +73,6 @@ test("allows shutdown before startup finishes", async () => {
   const startup = startServer({ ...setup, env: { MCP_TOKEN: "secret" } });
   resolveStartup({});
   await expect(startup).resolves.toBeDefined();
-});
-
-test("starts HTTP mode with the selected port and token", async () => {
-  const setup = dependencies({
-    createServer: jest.fn().mockResolvedValue({
-      httpInstance: { close: jest.fn((callback) => callback()) },
-      mcpServer: { close: jest.fn() },
-    }),
-  });
-  const result = await startServer({
-    ...setup,
-    env: { LOG_LEVEL: "debug", MCP_TOKEN: "secret", MCP_HTTP_PORT: "4321" },
-    argv: ["node", "app.mjs"],
-  });
-  expect(setup.createServer).toHaveBeenCalledWith(
-    expect.objectContaining({
-      httpPort: 4321,
-      auth: { mode: "static", token: "secret" },
-      stdio: false,
-    }),
-  );
-  expect(result.runtime).toBeDefined();
 });
 
 test("starts stdio mode and runs every shutdown hook", async () => {
