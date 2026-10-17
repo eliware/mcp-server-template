@@ -7,10 +7,10 @@ services:
       - .env
     environment:
       NODE_ENV: ${NODE_ENV:-production}
-      MCP_HTTP_PORT: ${MCP_HTTP_PORT:-1234}
+      PORT: ${PORT:-1234}
       MCP_TOKEN: ${MCP_TOKEN:?set MCP_TOKEN}
     ports:
-      - "${HOST_PORT:-1234}:${MCP_HTTP_PORT:-1234}"
+      - "${HOST_PORT:-1234}:${PORT:-1234}"
     restart: unless-stopped
     stop_grace_period: 30s
     init: true
@@ -20,7 +20,7 @@ services:
         - CMD
         - node
         - -e
-        - "fetch('http://127.0.0.1:' + (process.env.MCP_HTTP_PORT || 1234), { headers: { authorization: 'Bearer ' + process.env.MCP_TOKEN } }).then(r => process.exit(r.ok || r.status === 401 ? 0 : 1)).catch(() => process.exit(1))"
+        - "fetch('http://127.0.0.1:' + (process.env.PORT || 1234), { headers: { authorization: 'Bearer ' + process.env.MCP_TOKEN } }).then(r => process.exit(r.ok || r.status === 401 ? 0 : 1)).catch(() => process.exit(1))"
       interval: 30s
       timeout: 5s
       retries: 3

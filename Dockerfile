@@ -2,7 +2,7 @@ FROM node:26-bookworm-slim
 
 WORKDIR /app
 ENV NODE_ENV=production \
-    MCP_HTTP_PORT=1234
+    PORT=1234
 
 COPY --chown=node:node package*.json ./
 RUN npm ci --omit=dev \

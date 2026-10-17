@@ -4,13 +4,14 @@
 
 ### Changed
 
-- Move callback and promise server closing into a lifecycle module.
+- Close Fastify and stdio transports through the lifecycle module.
 - Combine default and configured HTTP startup cases in one runtime test.
 - Keep echo response construction in the tool handler and verify it through the adapter test.
 - Align repository guidance, MCP documentation, and directives with v13 conventions.
 - Publish GHCR images through the canonical workflow with signed attestations.
 - Update CI tag validation and Knit deployment commands.
-- Clarify tool, transport, token, and deployment guidance.
+- Allow stdio startup without an HTTP bearer token.
+- Document protocol revision, environment settings, container ports, health checks, and deployment steps.
 - Use concise runtime status messages.
 - Mock the server schema API in the echo test. The test then loads fewer server modules.
 

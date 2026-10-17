@@ -21,13 +21,13 @@ function dependencies(overrides = {}) {
 
 test("starts with process defaults and selected HTTP configuration", async () => {
   const previousToken = process.env.MCP_TOKEN;
-  const previousPort = process.env.MCP_HTTP_PORT;
+  const previousPort = process.env.PORT;
   const previousLevel = process.env.LOG_LEVEL;
   const setup = dependencies();
   delete setup.logger;
   process.env.MCP_TOKEN = "secret";
   process.env.LOG_LEVEL = "debug";
-  delete process.env.MCP_HTTP_PORT;
+  delete process.env.PORT;
   try {
     await startServer(setup);
     expect(setup.createLogger).toHaveBeenNthCalledWith(1, { level: "debug" });
@@ -35,23 +35,23 @@ test("starts with process defaults and selected HTTP configuration", async () =>
     await startServer(setup);
     expect(setup.createLogger).toHaveBeenNthCalledWith(2, { level: "info" });
     expect(setup.createServer).toHaveBeenCalledWith(
-      expect.objectContaining({ httpPort: 1234, stdio: false }),
+      expect.objectContaining({ port: 1234, stdio: false }),
     );
     await startServer({
       ...setup,
-      env: { LOG_LEVEL: "debug", MCP_TOKEN: "secret", MCP_HTTP_PORT: "4321" },
+      env: { LOG_LEVEL: "debug", MCP_TOKEN: "secret", PORT: "4321" },
       argv: ["node", "app.mjs"],
     });
     expect(setup.createServer).toHaveBeenLastCalledWith(
       expect.objectContaining({
-        httpPort: 4321,
+        port: 4321,
         auth: { mode: "static", token: "secret" },
         stdio: false,
       }),
     );
   } finally {
     restoreEnvironment("MCP_TOKEN", previousToken);
-    restoreEnvironment("MCP_HTTP_PORT", previousPort);
+    restoreEnvironment("PORT", previousPort);
     restoreEnvironment("LOG_LEVEL", previousLevel);
   }
 });
@@ -75,13 +75,13 @@ test("allows shutdown before startup finishes", async () => {
   await expect(startup).resolves.toBeDefined();
 });
 
-test("starts stdio mode and runs every shutdown hook", async () => {
+test("starts stdio without an HTTP token and runs every shutdown hook", async () => {
   const close = jest.fn();
   const errors = { removeHandlers: jest.fn() };
   const signals = { removeHandlers: jest.fn() };
   const setup = dependencies({
     createServer: jest.fn().mockResolvedValue({
-      mcpServer: { close },
+      app: { close },
       transport: { close },
     }),
     registerHandlers: jest.fn(() => errors),
@@ -89,11 +89,13 @@ test("starts stdio mode and runs every shutdown hook", async () => {
   });
   const result = await startServer({
     ...setup,
-    env: { MCP_TOKEN: "secret" },
+    env: {},
     argv: ["node", "app.mjs", "--stdio"],
   });
   await setup.registerSignals.mock.calls[0][0].shutdownHook("SIGTERM");
-  expect(setup.createServer).toHaveBeenCalledWith(expect.objectContaining({ stdio: true }));
+  expect(setup.createServer).toHaveBeenCalledWith(
+    expect.objectContaining({ stdio: true, auth: { mode: "none" } }),
+  );
   expect(close).toHaveBeenCalledTimes(2);
   expect(errors.removeHandlers).toHaveBeenCalled();
   expect(result.signals).toBe(signals);

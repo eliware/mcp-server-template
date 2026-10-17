@@ -10,8 +10,9 @@ export async function startServer({
   logger = createLogger({ level: env.LOG_LEVEL || "info" }),
 }) {
   const errors = registerHandlers({ log: logger });
+  const stdio = argv.includes("--stdio");
   const token = env.MCP_TOKEN;
-  if (!token) {
+  if (!stdio && !token) {
     logger.error("MCP_TOKEN environment variable is required.");
     errors.removeHandlers();
     const error = new Error("MCP_TOKEN environment variable is required.");
@@ -24,12 +25,7 @@ export async function startServer({
     log: logger,
     shutdownHook: async () => {
       if (!runtime) return;
-      await Promise.all([
-        closeServer(runtime.httpInstance),
-        closeServer(runtime.httpsInstance),
-        closeServer(runtime.transport),
-        closeServer(runtime.mcpServer),
-      ]);
+      await Promise.all([closeServer(runtime.app), closeServer(runtime.transport)]);
       errors.removeHandlers();
       logger.info("MCP server stopped.");
     },
@@ -38,14 +34,14 @@ export async function startServer({
   try {
     runtime = await createServer({
       log: logger,
-      stdio: argv.includes("--stdio"),
-      httpPort: env.MCP_HTTP_PORT ? Number(env.MCP_HTTP_PORT) : 1234,
-      auth: { mode: "static", token },
+      stdio,
+      port: env.PORT ? Number(env.PORT) : 1234,
+      auth: stdio ? { mode: "none" } : { mode: "static", token },
       toolsDir: new URL("../tools/", import.meta.url).pathname,
     });
     logger.info("MCP server started.", {
-      httpPort: env.MCP_HTTP_PORT || 1234,
-      stdio: argv.includes("--stdio"),
+      port: env.PORT || 1234,
+      stdio,
     });
     return { runtime, signals, errors };
   } catch (error) {

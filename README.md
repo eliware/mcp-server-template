@@ -32,11 +32,12 @@ This template starts Model Context Protocol servers. Each derived server owns it
 
 ## Requirements
 
-Use Node.js 26 or later and npm 12 or later for repository validation.
+Use Node.js 26 or later. Use an MCP client that supports protocol revision `2026-07-28`.
+Use npm 12 or later for repository validation.
 
 ## Setup
 
-Create a repository from this template. Replace the template name, description, URLs, keywords, and sample content.
+Create a repository from this template. Replace the package name, description, URLs, keywords, and sample tool.
 Run `npm ci` from the repository root.
 
 ## Usage
@@ -50,7 +51,7 @@ Keep documents and records in the repository that owns them.
 
 ## Testing
 
-Run `npm test` before handoff. It runs the repository checks through `eliware-test`.
+Run `eliware-test` before handoff. It runs the repository checks.
 
 ## Troubleshooting
 
@@ -64,14 +65,19 @@ Use only approved secret stores for secret values.
 
 ## Configuration
 
-Set `MCP_TOKEN` before HTTP startup. `MCP_HTTP_PORT` defaults to `1234`. `LOG_LEVEL` defaults to `info`.
+Set `MCP_TOKEN` before HTTP startup. Stdio mode does not require this token.
+`PORT` defaults to `1234`. `LOG_LEVEL` defaults to `info`.
 Store the token in an untracked `.env` file or an approved secret store.
 
 ## Operations
 
 Run `node bin/mcp-server-template.mjs` for HTTP. Run `node bin/mcp-server-template.mjs --stdio` for stdio.
 The HTTP listener uses `1234` by default. Build the image with `docker build -t mcp-server-template .`.
-Deploy a released image by version tag and recorded SHA-256 digest. Publication does not deploy the server.
+Set `MCP_TOKEN` in `.env` before you run `docker compose up --build`.
+Set `HOST_PORT` to change the host listener number.
+
+Deploy a released image by version tag and recorded SHA-256 digest.
+Publication does not deploy the server.
 
 ## Tools
 
@@ -88,8 +94,9 @@ The starter registers no prompts.
 
 ## Transport
 
-HTTP is the default transport. Use `MCP_HTTP_PORT` to set the listener number.
-Pass `--stdio` to start stdio. Stdio mode does not open an HTTP listener.
+HTTP is the default transport. Use `PORT` to set the listener number.
+Pass `--stdio` to start stdio. Stdio mode does not open an HTTP listener or require `MCP_TOKEN`.
+Use a client that supports protocol revision `2026-07-28`.
 
 ## Authentication
 

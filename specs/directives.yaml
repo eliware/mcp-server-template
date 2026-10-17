@@ -3,7 +3,7 @@ description: Repository-specific directives for the Eliware MCP server template.
 directives:
   - id: E-1040.0
     dos:
-      - Provide an MCP server with tool adapters, HTTP and stdio transports, and token checks.
+      - Provide an MCP server with tool adapters, HTTP and stdio transports, and HTTP bearer checks.
       - Document the tool behavior.
       - Replace template identity and package metadata in each derived server.
     donts:

@@ -1,39 +1,71 @@
 # MCP server guide
 
-Use this guide to configure and run an MCP server from this template.
+Use this guide to create, configure, run, and operate a server from this template.
 
-## Create and configure
+## Requirements
+
+Use Node.js 26 or later. Use an MCP client that supports protocol revision `2026-07-28`.
+Use npm 12 or later to validate this repository.
+
+## Create the application
 
 1. Create a repository from this template.
 2. Set the package name, description, URLs, and keywords.
-3. Copy `.env.example` to an untracked `.env` file.
-4. Set `MCP_TOKEN` before HTTP startup.
-5. Keep the token in an approved secret store in deployed systems.
+3. Replace the sample tool and application metadata.
+4. Run `npm ci` from the repository root.
+
+## Configure the application
+
+Copy `.env.example` to `.env`. Keep `.env` out of Git.
+
+| Variable    | Default    | Purpose                                 |
+| ----------- | ---------- | --------------------------------------- |
+| `MCP_TOKEN` | No default | Bearer token for HTTP authentication.   |
+| `PORT`      | `1234`     | Set the HTTP listener number.           |
+| `LOG_LEVEL` | `info`     | Set the level for application messages. |
+
+HTTP mode requires `MCP_TOKEN`. Stdio mode does not use HTTP authentication.
+Set secrets through an approved secret store in deployed systems.
 
 ## Select a transport
 
-Run `node bin/mcp-server-template.mjs` to start the HTTP transport. The listener uses `1234` by default. Set `MCP_HTTP_PORT` to select a different number.
+Run `node bin/mcp-server-template.mjs` to start the HTTP transport.
+Set `PORT` to select a listener number. The default is `1234`.
 
-Run `node bin/mcp-server-template.mjs --stdio` to start the stdio transport. Stdio mode does not open an HTTP listener.
+Run `node bin/mcp-server-template.mjs --stdio` to start the stdio transport.
+The process communicates with its MCP client through stdin and stdout.
+Send application logs to stderr. Do not write other data to stdout.
 
-Use HTTPS for remote HTTP access. Limit access to approved clients. Do not show a token in logs or command output.
+The server uses Streamable HTTP for network requests. It does not support HTTP with SSE.
+The server accepts protocol revision `2026-07-28` only.
 
-## Add tools
+## Add a tool
 
-Put each tool implementation under `src/tools/`. Add a root `tools/` adapter for discovery. Define and validate the input schema and response shape.
+Put each tool implementation under `src/tools/`. Add a matching adapter under `tools/`.
+The adapter re-exports its handler. Its file name becomes the tool name.
+Define the input with a Zod schema and return a valid MCP tool result.
 
-The sample `echo` tool returns the input text. The starter registers no resources or prompts.
+The starter provides an `echo` tool. It returns the input text as JSON.
+The starter adds no resources or prompts.
 
 ## Stop the server
 
-The runtime closes active transports during shutdown. Keep shutdown logic in `src/runtime.mjs` and test it with mocks.
+The runtime closes active transports after it receives a shutdown signal.
+The runtime handles `SIGINT` and `SIGTERM` through `@eliware/common`.
+Keep cleanup for application resources in the derived application.
 
-## Container and deployment
+## Container operations
 
-Build the image with `docker build -t mcp-server-template .`. The image is `ghcr.io/eliware/mcp-server-template`.
+Build the image with `docker build -t mcp-server-template .`.
+Run the image with `docker compose up --build` after you set `MCP_TOKEN` in `.env`.
+Set `HOST_PORT` to change the host listener number. Set `PORT` to change the container listener number.
+The health check sends a bearer token to the server.
 
-Use a released version tag and its recorded SHA-256 digest for deployment. Publication does not deploy the server.
+Use a released image tag and its recorded SHA-256 digest for deployment.
+Publication does not deploy the server.
+Use HTTPS for remote access and limit access to approved clients.
 
-## Validate
+## Validate changes
 
-Run `npm test` before handoff. It checks tests, lint, formatting, audit, and applicable profile rules.
+Run `eliware-test` before handoff. It checks tests, lint, formatting, audit, packaging, and repository rules.
+Run `eliware-test --format` to format files before you run the full validation.

@@ -7,15 +7,15 @@ jest.unstable_mockModule("@eliware/mcp-server", () => ({ z: { string } }));
 const { default: registerEcho } = await import("../../src/tools/echo.mjs");
 
 test("echo tool registers a schema and returns the requested text", async () => {
-  const tool = jest.fn();
+  const registerTool = jest.fn();
   const log = { debug: jest.fn() };
-  await registerEcho({ mcpServer: { tool }, toolName: "echo", log });
+  await registerEcho({ mcpServer: { registerTool }, toolName: "echo", log });
 
-  expect(tool).toHaveBeenCalledTimes(1);
-  const [name, description, schema, handler] = tool.mock.calls[0];
+  expect(registerTool).toHaveBeenCalledTimes(1);
+  const [name, options, handler] = registerTool.mock.calls[0];
   expect(name).toBe("echo");
-  expect(description).toBe("Echo Tool");
-  expect(schema.echoText).toBe(stringSchema);
+  expect(options.description).toBe("Echo text to the caller.");
+  expect(options.inputSchema.echoText).toBe(stringSchema);
   expect(string).toHaveBeenCalledTimes(1);
 
   const response = await handler({ echoText: "hello" });
