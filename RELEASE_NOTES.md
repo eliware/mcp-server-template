@@ -1,5 +1,15 @@
 # Release Notes
 
+## 13.0.0 — 2026-10-17
+
+### Changed
+
+- Align repository guidance, MCP documentation, and directives with v13 conventions.
+- Publish GHCR images through the canonical workflow with signed attestations.
+- Update CI tag validation and Knit deployment commands.
+- Clarify tool, transport, token, and deployment guidance.
+- Use concise runtime status messages.
+
 ## 12.0.0 — 2026-10-12
 
 ### Changed

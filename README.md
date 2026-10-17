@@ -28,7 +28,7 @@ A Model Context Protocol (MCP) server template for building AI and automation to
 
 ## Features
 
-This template provides a reusable starting point. Each derived repository owns its product behavior and operating decisions.
+This template starts Model Context Protocol servers. Each derived server owns its behavior and operating decisions.
 
 ## Requirements
 
@@ -55,7 +55,7 @@ Run `npm test` before handoff. It runs the repository checks through `eliware-te
 ## Troubleshooting
 
 Install the required Node.js and npm versions. Run `npm ci` after dependency changes.
-Review the file and rule in any validation error.
+For each validation error, examine the named file and rule.
 
 ## Security
 
@@ -70,7 +70,7 @@ Store the token in an untracked `.env` file or an approved secret store.
 ## Operations
 
 Run `node bin/mcp-server-template.mjs` for HTTP. Run `node bin/mcp-server-template.mjs --stdio` for stdio.
-The HTTP port defaults to `1234`. Build the image with `docker build -t mcp-server-template .`.
+The HTTP listener uses `1234` by default. Build the image with `docker build -t mcp-server-template .`.
 Deploy a released image by version tag and recorded SHA-256 digest. Publication does not deploy the server.
 
 ## Tools
@@ -88,7 +88,7 @@ The starter registers no prompts.
 
 ## Transport
 
-HTTP is the default transport. Use `MCP_HTTP_PORT` to set its port.
+HTTP is the default transport. Use `MCP_HTTP_PORT` to set the listener number.
 Pass `--stdio` to start stdio. Stdio mode does not open an HTTP listener.
 
 ## Authentication

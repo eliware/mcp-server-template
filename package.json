@@ -1,6 +1,6 @@
 {
   "name": "@eliware/mcp-server-template",
-  "version": "12.0.0",
+  "version": "13.0.0",
   "type": "module",
   "description": "A Model Context Protocol (MCP) server template for building AI and automation tool APIs.",
   "keywords": [

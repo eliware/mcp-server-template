@@ -10,13 +10,13 @@ Use this guide to configure and run an MCP server from this template.
 4. Set `MCP_TOKEN` before HTTP startup.
 5. Keep the token in an approved secret store in deployed systems.
 
-## Choose a transport
+## Select a transport
 
-Run `node bin/mcp-server-template.mjs` to start the HTTP transport. The default port is `1234`. Set `MCP_HTTP_PORT` to use another port.
+Run `node bin/mcp-server-template.mjs` to start the HTTP transport. The listener uses `1234` by default. Set `MCP_HTTP_PORT` to select a different number.
 
 Run `node bin/mcp-server-template.mjs --stdio` to start the stdio transport. Stdio mode does not open an HTTP listener.
 
-Use HTTPS for remote HTTP access. Limit access to approved clients. Do not expose a token in logs or command output.
+Use HTTPS for remote HTTP access. Limit access to approved clients. Do not show a token in logs or command output.
 
 ## Add tools
 

@@ -39,7 +39,7 @@ export async function startServer({
         closeServer(runtime.mcpServer),
       ]);
       errors.removeHandlers();
-      logger.info("MCP server shut down.");
+      logger.info("MCP server stopped.");
     },
   });
 
@@ -51,7 +51,7 @@ export async function startServer({
       auth: { mode: "static", token },
       toolsDir: new URL("../tools/", import.meta.url).pathname,
     });
-    logger.info("MCP server ready.", {
+    logger.info("MCP server started.", {
       httpPort: env.MCP_HTTP_PORT || 1234,
       stdio: argv.includes("--stdio"),
     });
