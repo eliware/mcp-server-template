@@ -4,9 +4,9 @@
 
 ### Changed
 
-- Move server close compatibility handling into a lifecycle module.
-- Combine default and configured HTTP startup checks in one runtime test.
-- Keep echo response construction in the tool handler and verify it through adapter integration coverage.
+- Move callback and promise server closing into a lifecycle module.
+- Combine default and configured HTTP startup cases in one runtime test.
+- Keep echo response construction in the tool handler and verify it through the adapter test.
 - Align repository guidance, MCP documentation, and directives with v13 conventions.
 - Publish GHCR images through the canonical workflow with signed attestations.
 - Update CI tag validation and Knit deployment commands.
