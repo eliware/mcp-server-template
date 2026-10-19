@@ -55,9 +55,6 @@ Run `eliware-test` before handoff. It runs the repository checks.
 
 ## Troubleshooting
 
-Install the required Node.js and npm versions. Run `npm ci` after dependency changes.
-For each validation error, examine the named file and rule.
-
 ## Security
 
 Keep credentials, secrets, private data, and runtime state out of Git.
