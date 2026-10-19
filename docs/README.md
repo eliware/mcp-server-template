@@ -2,6 +2,8 @@
 
 Use this guide to create, configure, run, and operate a server from this template.
 
+> After you create a repository from this template, replace this document with end-user documentation for your repository.
+
 ## Requirements
 
 Use Node.js 26 or later. Use an MCP client that supports protocol revision `2026-07-28`.
