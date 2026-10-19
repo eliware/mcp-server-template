@@ -1,6 +1,6 @@
 # Release Notes
 
-## 13.0.0 — 2026-10-17
+## 13.0.0 — 2026-10-19
 
 ### Added
 
@@ -9,7 +9,9 @@
 
 ### Changed
 
-- Set the template version to 13.0.0, upgrade `@eliware/mcp-server` to v13, refresh dotenv, and sync the lock file.
+- Set the template version to 13.0.0 and upgrade `@eliware/test` to v13.
+- Keep `@eliware/mcp-server` at v12 because v13 is not available in npm.
+- Refresh dotenv and sync the lock file.
 - Use `PORT` for the HTTP listener and keep `MCP_TOKEN` for HTTP authentication.
 - Allow stdio startup without an HTTP bearer token.
 - Close the active Fastify app or stdio transport during shutdown.
@@ -23,6 +25,8 @@
 - Use concise runtime status messages.
 - Replace callback-based closing with async shutdown of the active Fastify app or stdio transport.
 - Replace `publish.yaml` with the canonical `ghcr.yaml` workflow.
+- Add an `.env.example` placeholder for the MCP token and document template replacement steps.
+- Align package instructions, Docker configuration, and repository conventions with v13.
 
 ## 12.0.0 — 2026-10-12
 
