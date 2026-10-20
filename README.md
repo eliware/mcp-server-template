@@ -55,6 +55,9 @@ Run `eliware-test` before handoff. It runs the repository checks.
 
 ## Troubleshooting
 
+If HTTP startup reports a missing token, set `MCP_TOKEN` in your environment or `.env` file.
+If a container health check fails, confirm that `MCP_TOKEN` and `PORT` match the container settings. See the [server guide](docs/README.md).
+
 ## Security
 
 Keep credentials, secrets, private data, and runtime state out of Git.

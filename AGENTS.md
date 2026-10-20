@@ -31,6 +31,8 @@ Keep credentials, secret values, private data, and runtime state out of Git.
 
 ## Changes
 
+Update focused tests and user documentation when you change server behavior.
+
 ## Application
 
 Run focused tests first during development.
@@ -41,11 +43,13 @@ Run the full `npm test` suite for final validation before a commit, milestone, o
 
 ## MCP server
 
+When you add a tool, add its implementation in `src/tools/` and its adapter in `tools/`.
+
 ## GHCR publication
 
 Image: ghcr.io/eliware/mcp-server-template
 
-Pull command: docker pull ghcr.io/eliware/mcp-server-template:v13.0.0
+Pull command: docker pull ghcr.io/eliware/mcp-server-template:v14.0.0
 
 Supported tags: vMAJOR.MINOR.PATCH
 

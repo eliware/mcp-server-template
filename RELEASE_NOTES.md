@@ -1,32 +1,30 @@
 # Release Notes
 
-## 13.0.0 — 2026-10-19
+## 14.0.0 — 2026-10-20
 
 ### Added
 
-- Add a GHCR workflow that publishes signed container images.
-- Add a lifecycle module that closes Fastify apps and stdio transports.
+- Add signed container image publication with release tag and digest verification.
+- Add lifecycle handling that closes the active Fastify app or stdio transport.
+- Add a placeholder MCP token value and instructions to replace template documentation.
 
 ### Changed
 
-- Set the template version to 13.0.0 and upgrade `@eliware/test` to v13.
-- Keep `@eliware/mcp-server` at v12 because v13 is not available in npm.
-- Refresh dotenv and sync the lock file.
-- Use `PORT` for the HTTP listener and keep `MCP_TOKEN` for HTTP authentication.
-- Allow stdio startup without an HTTP bearer token.
-- Close the active Fastify app or stdio transport during shutdown.
-- Keep echo response construction in the tool handler and test it through the adapter.
+- Align package metadata, repository specifications, and workflows with the 14.0.0 conventions.
+- Update `@eliware/common` and `@eliware/mcp-server` to version 13.0.0.
+- Refresh runtime dependency locks with dotenv.
+- Use `PORT` for HTTP listeners and require `MCP_TOKEN` only for HTTP authentication.
+- Keep stdio startup available without an HTTP bearer token.
+- Separate echo response construction from its tool handler and adapter.
+- Keep echo tests focused by mocking the MCP server schema API.
 - Combine default and configured HTTP startup checks in one runtime test.
-- Mock the server schema API in the echo test. The test then loads fewer modules.
-- Align repository instructions, documentation, and directives with v13 conventions.
-- Document protocol revision `2026-07-28`, environment variables, container listener mapping, health checks, and deployment steps.
-- Update CI tag validation and fetch full Git history for tag checks.
-- Update GHCR publishing and Knit deployment commands. The deploy workflow pulls repository changes.
-- Use concise runtime status messages.
-- Replace callback-based closing with async shutdown of the active Fastify app or stdio transport.
-- Replace `publish.yaml` with the canonical `ghcr.yaml` workflow.
-- Add an `.env.example` placeholder for the MCP token and document template replacement steps.
-- Align package instructions, Docker configuration, and repository conventions with v13.
+- Close active transports asynchronously during shutdown and use concise runtime status messages.
+- Document the protocol revision, environment variables, tools, container settings, health check, and deployment limits.
+- Update CI to use current GitHub Actions and fetch complete Git history for release tag checks.
+- Align GHCR publication and Knit deployment workflows with the shared procedures.
+- Update package instructions, Docker configuration, and application guidance.
+- Complete the README Troubleshooting section and the AGENTS.md Changes and MCP server sections.
+- Update the GHCR pull example to use image tag `v14.0.0`.
 
 ## 12.0.0 — 2026-10-12
 
