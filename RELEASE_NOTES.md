@@ -1,30 +1,34 @@
 # Release Notes
 
-## 14.0.0 — 2026-10-20
+## 15.0.0 — 2026-10-24
 
 ### Added
 
-- Add signed container image publication with release tag and digest verification.
-- Add lifecycle handling that closes the active Fastify app or stdio transport.
-- Add a placeholder MCP token value and instructions to replace template documentation.
+- Start the sample MCP server with HTTP or stdio transport.
+- Add the `echo` tool with a Zod input schema and a JSON response.
+- Add graceful shutdown for active HTTP and stdio transports.
+- Add port validation and lifecycle tests.
+- Add GHCR image publication with release tag and digest verification.
+- Document setup, configuration, transports, authentication, tools, containers, and deployment.
+
+### Breaking changes
+
+- Replace `MCP_HTTP_PORT` with `PORT` to select the HTTP port.
+
+### Migration
+
+- Set `PORT` when you previously set `MCP_HTTP_PORT`.
 
 ### Changed
 
-- Align package metadata, repository specifications, and workflows with the 14.0.0 conventions.
-- Update `@eliware/common` and `@eliware/mcp-server` to version 13.0.0.
-- Refresh runtime dependency locks with dotenv.
-- Use `PORT` for HTTP listeners and require `MCP_TOKEN` only for HTTP authentication.
+- Align package metadata, repository directives, and maintained guidance with Eliware Test v15.
+- Update `@eliware/common`, `@eliware/mcp-server`, and `@eliware/test` to version 15.0.0.
+- Update `dotenv` to version 18.0.9.
+- Use `PORT` for the HTTP listener and require `MCP_TOKEN` only for HTTP authentication.
 - Keep stdio startup available without an HTTP bearer token.
-- Separate echo response construction from its tool handler and adapter.
-- Keep echo tests focused by mocking the MCP server schema API.
-- Combine default and configured HTTP startup checks in one runtime test.
-- Close active transports asynchronously during shutdown and use concise runtime status messages.
-- Document the protocol revision, environment variables, tools, container settings, health check, and deployment limits.
-- Update CI to use current GitHub Actions and fetch complete Git history for release tag checks.
-- Align GHCR publication and Knit deployment workflows with the shared procedures.
-- Update package instructions, Docker configuration, and application guidance.
-- Complete the README Troubleshooting section and the AGENTS.md Changes and MCP server sections.
-- Update the GHCR pull example to use image tag `v14.0.0`.
+- Use current GitHub Actions and fetch complete history in CI.
+- Build containers with the current package lock and run the application as the unprivileged `node` user.
+- Support MCP protocol revision `2026-07-28` with Streamable HTTP and stdio transports.
 
 ## 12.0.0 — 2026-10-12
 

@@ -49,7 +49,7 @@ When you add a tool, add its implementation in `src/tools/` and its adapter in `
 
 Image: ghcr.io/eliware/mcp-server-template
 
-Pull command: docker pull ghcr.io/eliware/mcp-server-template:v14.0.0
+Pull command: docker pull ghcr.io/eliware/mcp-server-template:v15.0.0
 
 Supported tags: vMAJOR.MINOR.PATCH
 
