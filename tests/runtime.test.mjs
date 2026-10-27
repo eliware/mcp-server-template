@@ -1,4 +1,6 @@
+import { EventEmitter } from "node:events";
 import { jest, expect, test } from "@jest/globals";
+import { registerSignals } from "@eliware/common";
 import { startServer } from "../src/runtime.mjs";
 
 const logger = {
@@ -56,12 +58,36 @@ test("starts with process defaults and selected HTTP configuration", async () =>
   }
 });
 
-test("allows shutdown before startup finishes", async () => {
+test("waits for pending server creation and closes both handles before default signal exit", async () => {
   let resolveStartup;
-  const close = jest.fn();
-  const errors = { removeHandlers: jest.fn() };
-  const signals = { removeHandlers: jest.fn() };
-  let shutdownHook;
+  let resolveExit;
+  let resolveClosesStarted;
+  let closedHandles = 0;
+  let closedHandlesAtExit = 0;
+  const closeResolvers = [];
+  let closeCount = 0;
+  const closesStarted = new Promise((resolve) => {
+    resolveClosesStarted = resolve;
+  });
+  const exitPromise = new Promise((resolve) => {
+    resolveExit = resolve;
+  });
+  const processObj = new EventEmitter();
+  processObj.exit = jest.fn((code) => {
+    closedHandlesAtExit = closedHandles;
+    resolveExit(code);
+  });
+  const close = jest.fn(
+    () =>
+      new Promise((resolve) => {
+        closeResolvers.push(() => {
+          closedHandles += 1;
+          resolve();
+        });
+        closeCount += 1;
+        if (closeCount === 2) resolveClosesStarted();
+      }),
+  );
   const setup = dependencies({
     createServer: jest.fn(
       () =>
@@ -69,12 +95,84 @@ test("allows shutdown before startup finishes", async () => {
           resolveStartup = resolve;
         }),
     ),
+    registerSignals: jest.fn((options) => registerSignals({ ...options, processObj })),
+  });
+  const startup = startServer({ ...setup, env: { MCP_TOKEN: "secret" } });
+  processObj.emit("SIGTERM");
+  await Promise.resolve();
+  expect(processObj.exit).not.toHaveBeenCalled();
+  resolveStartup({ app: { close }, transport: { close } });
+  await closesStarted;
+  expect(close).toHaveBeenCalledTimes(2);
+  expect(closedHandles).toBe(0);
+  expect(processObj.exit).not.toHaveBeenCalled();
+  for (const resolveClose of closeResolvers) resolveClose();
+  await expect(startup).resolves.toBeDefined();
+  await expect(exitPromise).resolves.toBe(0);
+  expect(close).toHaveBeenCalledTimes(2);
+  expect(closedHandlesAtExit).toBe(2);
+  expect(processObj.exit).toHaveBeenCalledWith(0);
+});
+
+test("waits for failed server creation and cleanup before default signal exit", async () => {
+  let rejectStartup;
+  let resolveExit;
+  let cleanupFinished = false;
+  let cleanupFinishedAtExit = false;
+  const exitPromise = new Promise((resolve) => {
+    resolveExit = resolve;
+  });
+  const processObj = new EventEmitter();
+  processObj.exit = jest.fn((code) => {
+    cleanupFinishedAtExit = cleanupFinished;
+    resolveExit(code);
+  });
+  const startupError = new Error("startup failed after shutdown");
+  const errors = {
+    removeHandlers: jest.fn(() => {
+      cleanupFinished = true;
+    }),
+  };
+  const setup = dependencies({
+    createServer: jest.fn(
+      () =>
+        new Promise((resolve, reject) => {
+          rejectStartup = reject;
+        }),
+    ),
+    registerHandlers: jest.fn(() => errors),
+    registerSignals: jest.fn((options) => registerSignals({ ...options, processObj })),
+  });
+  const startup = startServer({ ...setup, env: { MCP_TOKEN: "secret" } });
+  processObj.emit("SIGTERM");
+  await Promise.resolve();
+  expect(processObj.exit).not.toHaveBeenCalled();
+  rejectStartup(startupError);
+  await expect(startup).rejects.toBe(startupError);
+  await expect(exitPromise).resolves.toBe(0);
+  expect(cleanupFinishedAtExit).toBe(true);
+  expect(processObj.exit).toHaveBeenCalledWith(0);
+});
+
+test("keeps an early shutdown request pending and idempotent", async () => {
+  let resolveStartup;
+  let shutdownHook;
+  const close = jest.fn();
+  const errors = { removeHandlers: jest.fn() };
+  const signals = { removeHandlers: jest.fn() };
+  const setup = dependencies({
+    createServer: jest.fn(
+      () =>
+        new Promise((resolve) => {
+          resolveStartup = resolve;
+        }),
+    ),
+    registerHandlers: jest.fn(() => errors),
     registerSignals: jest.fn((options) => {
       shutdownHook = options.shutdownHook;
       void shutdownHook("SIGTERM");
       return signals;
     }),
-    registerHandlers: jest.fn(() => errors),
   });
   const startup = startServer({ ...setup, env: { MCP_TOKEN: "secret" } });
   resolveStartup({ app: { close }, transport: { close } });

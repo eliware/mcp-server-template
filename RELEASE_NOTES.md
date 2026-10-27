@@ -6,12 +6,12 @@
 
 - Start an MCP server with HTTP or stdio transport and support protocol revision `2026-07-28`.
 - Add the `echo` tool with a Zod input schema and a JSON response.
-- Add graceful shutdown for HTTP and stdio transports after shutdown signals during startup.
+- Keep signal cleanup active until server creation completes after a signal during startup.
 - Add tests for port validation, server lifecycle, runtime startup, and the echo tool.
 
 ### Fixed
 
-- Close both server transports when a shutdown signal arrives while server creation is pending.
+- Close both server transports before the default signal handler exits after a shutdown signal during startup.
 
 ### Changed
 

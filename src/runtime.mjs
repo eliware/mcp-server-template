@@ -25,13 +25,18 @@ export async function startServer({
   let runtime;
   let signals;
   let stopping = false;
+  let closePromise;
   let shutdownPromise;
+  let finishStartup;
+  const startupPromise = new Promise((resolve) => {
+    finishStartup = resolve;
+  });
   const closeRuntime = () => {
-    if (!runtime || shutdownPromise) return shutdownPromise;
-    shutdownPromise = Promise.all([closeServer(runtime.app), closeServer(runtime.transport)]).then(
+    if (!runtime || closePromise) return closePromise;
+    closePromise = Promise.all([closeServer(runtime.app), closeServer(runtime.transport)]).then(
       () => logger.info("MCP server stopped."),
     );
-    return shutdownPromise;
+    return closePromise;
   };
   signals = registerSignals({
     log: logger,
@@ -40,7 +45,11 @@ export async function startServer({
       stopping = true;
       signals?.removeHandlers();
       errors.removeHandlers();
-      await closeRuntime();
+      shutdownPromise = (async () => {
+        await startupPromise;
+        await closeRuntime();
+      })();
+      await shutdownPromise;
     },
   });
   if (stopping) signals.removeHandlers();
@@ -53,6 +62,7 @@ export async function startServer({
       auth: stdio ? { mode: "none" } : { mode: "static", token },
       toolsDir: new URL("../tools/", import.meta.url).pathname,
     });
+    finishStartup();
     if (stopping) {
       await closeRuntime();
       return { runtime, signals, errors };
@@ -66,6 +76,7 @@ export async function startServer({
     logger.error("Failed to start MCP server.", { error });
     signals.removeHandlers();
     errors.removeHandlers();
+    finishStartup();
     throw error;
   }
 }
