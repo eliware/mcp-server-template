@@ -51,7 +51,7 @@ Keep documents and records in the repository that owns them.
 
 ## Testing
 
-Run `eliware-test` before handoff. It runs the repository checks.
+Run `npm test` before handoff. It runs the repository checks.
 
 ## Troubleshooting
 

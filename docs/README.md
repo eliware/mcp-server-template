@@ -69,5 +69,5 @@ Use HTTPS for remote access and limit access to approved clients.
 
 ## Validate changes
 
-Run `eliware-test` before handoff. It checks tests, lint, formatting, audit, packaging, and repository rules.
-Run `eliware-test --format` to format files before you run the full validation.
+Run `npm test` before handoff. It checks tests, lint, formatting, audit, packaging, and repository rules.
+Run `npm run format` to format files before you run the full validation.
