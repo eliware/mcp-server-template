@@ -25,17 +25,25 @@ export async function startServer({
   let runtime;
   let signals;
   let stopping = false;
+  let shutdownPromise;
+  const closeRuntime = () => {
+    if (!runtime || shutdownPromise) return shutdownPromise;
+    shutdownPromise = Promise.all([closeServer(runtime.app), closeServer(runtime.transport)]).then(
+      () => logger.info("MCP server stopped."),
+    );
+    return shutdownPromise;
+  };
   signals = registerSignals({
     log: logger,
     shutdownHook: async () => {
-      if (!runtime || stopping) return;
+      if (stopping) return shutdownPromise;
       stopping = true;
-      signals.removeHandlers();
+      signals?.removeHandlers();
       errors.removeHandlers();
-      await Promise.all([closeServer(runtime.app), closeServer(runtime.transport)]);
-      logger.info("MCP server stopped.");
+      await closeRuntime();
     },
   });
+  if (stopping) signals.removeHandlers();
 
   try {
     runtime = await createServer({
@@ -45,6 +53,10 @@ export async function startServer({
       auth: stdio ? { mode: "none" } : { mode: "static", token },
       toolsDir: new URL("../tools/", import.meta.url).pathname,
     });
+    if (stopping) {
+      await closeRuntime();
+      return { runtime, signals, errors };
+    }
     logger.info("MCP server started.", {
       port,
       stdio,

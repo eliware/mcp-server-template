@@ -58,6 +58,10 @@ test("starts with process defaults and selected HTTP configuration", async () =>
 
 test("allows shutdown before startup finishes", async () => {
   let resolveStartup;
+  const close = jest.fn();
+  const errors = { removeHandlers: jest.fn() };
+  const signals = { removeHandlers: jest.fn() };
+  let shutdownHook;
   const setup = dependencies({
     createServer: jest.fn(
       () =>
@@ -65,14 +69,20 @@ test("allows shutdown before startup finishes", async () => {
           resolveStartup = resolve;
         }),
     ),
-    registerSignals: jest.fn(({ shutdownHook }) => {
+    registerSignals: jest.fn((options) => {
+      shutdownHook = options.shutdownHook;
       void shutdownHook("SIGTERM");
-      return { removeHandlers: jest.fn() };
+      return signals;
     }),
+    registerHandlers: jest.fn(() => errors),
   });
   const startup = startServer({ ...setup, env: { MCP_TOKEN: "secret" } });
-  resolveStartup({});
+  resolveStartup({ app: { close }, transport: { close } });
   await expect(startup).resolves.toBeDefined();
+  await shutdownHook("SIGTERM");
+  expect(close).toHaveBeenCalledTimes(2);
+  expect(signals.removeHandlers).toHaveBeenCalledTimes(1);
+  expect(errors.removeHandlers).toHaveBeenCalledTimes(1);
 });
 
 test("starts stdio without an HTTP token and runs every shutdown hook", async () => {
